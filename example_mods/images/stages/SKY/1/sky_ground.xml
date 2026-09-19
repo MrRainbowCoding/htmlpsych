@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
--->
-<TextureAtlas imagePath="sky_ground.png" width="2048" height="1024">
-	<SubTexture name="sky_ground0000.png" x="0.5" y="0.5" width="1278" height="323.5" frameX="-2" frameY="-50.5" frameWidth="1281" frameHeight="400"/>
-	<SubTexture name="sky_ground0001.png" x="0.5" y="643.5" width="1276.5" height="315.5" frameX="-3.5" frameY="-58.5" frameWidth="1281" frameHeight="400"/>
-	<SubTexture name="sky_ground0002.png" x="0.5" y="325.5" width="1278" height="316.5" frameX="-2" frameY="-56.5" frameWidth="1281" frameHeight="400"/>
-</TextureAtlas>

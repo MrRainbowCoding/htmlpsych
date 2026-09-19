@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
--->
-<TextureAtlas imagePath="Angry_Right_side.png" width="2048" height="1024">
-	<SubTexture name="Angry_RightSide0000.png" x="674.5" y="0.5" width="672" height="720" frameX="-3.5" frameY="-0" frameWidth="676.5" frameHeight="721"/>
-	<SubTexture name="Angry_RightSide0001.png" x="1348" y="0.5" width="672" height="720" frameX="-3.5" frameY="-0" frameWidth="676.5" frameHeight="721"/>
-	<SubTexture name="Angry_RightSide0002.png" x="0.5" y="0.5" width="672.5" height="720" frameX="-3" frameY="-0" frameWidth="676.5" frameHeight="721"/>
-</TextureAtlas>
