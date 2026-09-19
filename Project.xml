@@ -113,7 +113,7 @@
 	<section if="MODS_ALLOWED">
 		<!-- native targets read mods straight off disk, web has to have them baked into the asset manifest to be reachable at all -->
 		<assets path='example_mods' rename='mods' embed='false' unless="web"/>
-		<assets path='example_mods' rename='mods' embed='true' if="web"/>
+		<assets path='example_mods' rename='mods' embed='true' exclude='*.mp4,*.webm,*.mov,*.wmv,*.avi,*.flv' if="web"/>
 	</section>
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
 	

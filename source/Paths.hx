@@ -446,8 +446,7 @@ class Paths
 	}
 	#end
 
-	// cross-platform stand-in for sys.FileSystem.readDirectory: on web there's no real filesystem,
-	// so we list immediate children from the embedded asset manifest instead
+	// Web builds do not expose a synchronous directory API.
 	static public function readDirectory(folder:String):Array<String>
 	{
 		#if sys
@@ -455,18 +454,7 @@ class Paths
 			return FileSystem.readDirectory(folder);
 		return [];
 		#else
-		var prefix:String = folder.endsWith('/') ? folder : folder + '/';
-		var found:Map<String, Bool> = [];
-		for (id in OpenFlAssets.list())
-		{
-			if (id.startsWith(prefix))
-			{
-				var name:String = id.substr(prefix.length).split('/')[0];
-				if (name.length > 0)
-					found.set(name, true);
-			}
-		}
-		return [for (name in found.keys()) name];
+		return [];
 		#end
 	}
 
@@ -475,10 +463,6 @@ class Paths
 		#if sys
 		return FileSystem.exists(folder) && FileSystem.isDirectory(folder);
 		#else
-		var prefix:String = folder.endsWith('/') ? folder : folder + '/';
-		for (id in OpenFlAssets.list())
-			if (id.startsWith(prefix))
-				return true;
 		return false;
 		#end
 	}

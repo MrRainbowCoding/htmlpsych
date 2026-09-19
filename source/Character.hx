@@ -128,23 +128,23 @@ class Character extends FlxSprite
 				if (json.repeatHoldAnimation == null) json.repeatHoldAnimation = true;
 				if (json.position == null && dummyJson.player_position != null) {
 					if (jsonPlayer)
-						json.position = dummyJson.player_position.copy();
+						json.position = copyArray(dummyJson.player_position);
 					else
-						json.position = dummyJson.enemy_position.copy();
+						json.position = copyArray(dummyJson.enemy_position);
 				}
 				if (json.camera_position == null && dummyJson.player_cameraPosition != null) {
 					if (jsonPlayer)
-						json.camera_position = dummyJson.player_cameraPosition.copy();
+						json.camera_position = copyArray(dummyJson.player_cameraPosition);
 					else
-						json.camera_position = dummyJson.enemy_cameraPosition.copy();
+						json.camera_position = copyArray(dummyJson.enemy_cameraPosition);
 				}
 				var animations:Array<Dynamic> = json.animations;
 				for (anim in animations) {
 					if (anim.offsets == null && anim.playerOffsets != null) {
 						if (jsonPlayer)
-							anim.offsets = anim.playerOffsets.copy();
+							anim.offsets = copyArray(anim.playerOffsets);
 						else
-							anim.offsets = anim.enemyOffsets.copy();
+							anim.offsets = copyArray(anim.enemyOffsets);
 					}
 				}
 
@@ -161,10 +161,10 @@ class Character extends FlxSprite
 
 				jsonScale = json.scale;
 
-				playerPosition = json.position.copy();
-				enemyPosition = json.position.copy();
-				playerCameraPosition = json.camera_position.copy();
-				enemyCameraPosition = json.camera_position.copy();
+				playerPosition = copyArray(json.position);
+				enemyPosition = copyArray(json.position);
+				playerCameraPosition = copyArray(json.camera_position);
+				enemyCameraPosition = copyArray(json.camera_position);
 
 				healthIcon = json.healthicon;
 				singDuration = json.sing_duration;
@@ -204,15 +204,15 @@ class Character extends FlxSprite
 							name: newRight.name,
 							fps: newRight.fps,
 							loop: newRight.loop == true,
-							indices: newRight.indices.copy(),
-							offsets: newRight.offsets.copy()
+							indices: copyArray(newRight.indices),
+							offsets: copyArray(newRight.offsets)
 						};
 
 						newRight.name = leftAnim.name;
 						newRight.fps = leftAnim.fps;
 						newRight.loop = leftAnim.loop == true;
-						newRight.indices = leftAnim.indices.copy();
-						newRight.offsets = leftAnim.offsets.copy();
+						newRight.indices = copyArray(leftAnim.indices);
+						newRight.offsets = copyArray(leftAnim.offsets);
 						addAnimation(newRight.anim, newRight.name, newRight.fps, newRight.loop, newRight.indices);
 						addOffset(newRight.anim, newRight.offsets[0], newRight.offsets[1]);
 
@@ -220,7 +220,7 @@ class Character extends FlxSprite
 						leftAnim.fps = newLeft.fps;
 						leftAnim.loop = newLeft.loop;
 						leftAnim.indices = newLeft.indices;
-						leftAnim.offsets = newLeft.offsets.copy();
+						leftAnim.offsets = copyArray(newLeft.offsets);
 						addAnimation(leftAnim.anim, leftAnim.name, leftAnim.fps, leftAnim.loop, leftAnim.indices);
 						addOffset(leftAnim.anim, leftAnim.offsets[0], leftAnim.offsets[1]);
 					}
@@ -459,6 +459,11 @@ class Character extends FlxSprite
 	public function quickAnimAdd(name:String, anim:String)
 	{
 		animation.addByPrefix(name, anim, 24, false);
+	}
+
+	static function copyArray<T>(values:Array<T>):Array<T>
+	{
+		return [for (value in values) value];
 	}
 
 	public static function getFile(name:String):Dynamic {

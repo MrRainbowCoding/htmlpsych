@@ -102,6 +102,18 @@ class WeekData {
 			}
 		}
 
+		#if web
+		var modWeekListPath:String = Paths.mods('weeks/weekList.txt');
+		if (Paths.exists(modWeekListPath, TEXT))
+		{
+			for (daWeek in CoolUtil.coolTextFile(modWeekListPath))
+			{
+				var path:String = '${Paths.mods()}weeks/${daWeek}.json';
+				if (Paths.exists(path, TEXT))
+					addWeek(daWeek, path, Paths.mods(), 1, originalLength);
+			}
+		}
+		#else
 		for (i in 0...directories.length) {
 			var directory:String = '${directories[i]}weeks/';
 			if (Paths.directoryExists(directory)) {
@@ -129,6 +141,7 @@ class WeekData {
 				}
 			}
 		}
+		#end
 	}
 
 	private static function addWeek(weekToCheck:String, path:String, directory:String, i:Int, originalLength:Int)
