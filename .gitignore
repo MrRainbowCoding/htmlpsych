@@ -35,3 +35,9 @@ example_mods/fonts
 example_mods/videos
 example_mods/pack.json
 example_mods/pack.png
+example_mods/general_scripts
+example_mods/scripts
+example_mods/songs
+example_mods/stages
+example_mods/weeks
+example_mods/.DS_Store

@@ -14,6 +14,10 @@ example_mods/
 │   ├── data
 │   ├── fonts
 │   ├── videos
+│   ├── scripts
+│   ├── songs
+│   ├── stages
+│   ├── weeks
 │   ├── pack.json
 │   ├── pack.png
 ```
