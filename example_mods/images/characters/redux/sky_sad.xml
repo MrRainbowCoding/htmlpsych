@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="sky_sad.png" width="2048" height="2048">
+	<SubTexture name="sad down0000.png" x="1390.5" y="833" width="152.5" height="251.5" frameX="-3" frameY="-2.5" frameWidth="158.5" frameHeight="254.5"/>
+	<SubTexture name="sad down0001.png" x="1390.5" y="833" width="152.5" height="251.5" frameX="-3" frameY="-2.5" frameWidth="158.5" frameHeight="254.5"/>
+	<SubTexture name="sad down0002.png" x="320.5" y="1781.5" width="158" height="254" frameX="-0" frameY="-0" frameWidth="158.5" frameHeight="254.5"/>
+	<SubTexture name="sad down0003.png" x="320.5" y="1781.5" width="158" height="254" frameX="-0" frameY="-0" frameWidth="158.5" frameHeight="254.5"/>
+	<SubTexture name="sad down0004.png" x="1231" y="1394" width="158" height="254" frameX="-0" frameY="-0" frameWidth="158.5" frameHeight="254.5"/>
+	<SubTexture name="sad down0005.png" x="1231" y="1394" width="158" height="254" frameX="-0" frameY="-0" frameWidth="158.5" frameHeight="254.5"/>
+	<SubTexture name="sad down0006.png" x="0.5" y="1781.5" width="158.5" height="254" frameX="-0" frameY="-0" frameWidth="158.5" frameHeight="254.5"/>
+	<SubTexture name="sad down0007.png" x="0.5" y="1781.5" width="158.5" height="254" frameX="-0" frameY="-0" frameWidth="158.5" frameHeight="254.5"/>
+	<SubTexture name="sad down0008.png" x="160.5" y="1781.5" width="158.5" height="254" frameX="-0" frameY="-0" frameWidth="158.5" frameHeight="254.5"/>
+	<SubTexture name="sad down0009.png" x="160.5" y="1781.5" width="158.5" height="254" frameX="-0" frameY="-0" frameWidth="158.5" frameHeight="254.5"/>
+	<SubTexture name="sad down0010.png" x="1331.5" y="1112" width="158" height="254" frameX="-0" frameY="-0" frameWidth="158.5" frameHeight="254.5"/>
+	<SubTexture name="sad down0011.png" x="1331.5" y="1112" width="158" height="254" frameX="-0" frameY="-0" frameWidth="158.5" frameHeight="254.5"/>
+	<SubTexture name="sad down0012.png" x="1331.5" y="1112" width="158" height="254" frameX="-0" frameY="-0" frameWidth="158.5" frameHeight="254.5"/>
+	<SubTexture name="sad down0013.png" x="1331.5" y="1112" width="158" height="254" frameX="-0" frameY="-0" frameWidth="158.5" frameHeight="254.5"/>
+	<SubTexture name="sad down0014.png" x="1331.5" y="1112" width="158" height="254" frameX="-0" frameY="-0" frameWidth="158.5" frameHeight="254.5"/>
+	<SubTexture name="sad idle0000.png" x="537" y="1129.5" width="155" height="278.5" frameX="-0" frameY="-0.5" frameWidth="167.5" frameHeight="279.5"/>
+	<SubTexture name="sad idle0001.png" x="693" y="849" width="155" height="278.5" frameX="-0" frameY="-0.5" frameWidth="167.5" frameHeight="279.5"/>
+	<SubTexture name="sad idle0002.png" x="703.5" y="282" width="154.5" height="279" frameX="-1" frameY="-0" frameWidth="167.5" frameHeight="279.5"/>
+	<SubTexture name="sad idle0003.png" x="537" y="849" width="154.5" height="279" frameX="-1" frameY="-0" frameWidth="167.5" frameHeight="279.5"/>
+	<SubTexture name="sad idle0004.png" x="741" y="562.5" width="155" height="277.5" frameX="-5" frameY="-1.5" frameWidth="167.5" frameHeight="279.5"/>
+	<SubTexture name="sad idle0005.png" x="859.5" y="282" width="155" height="277.5" frameX="-5" frameY="-1.5" frameWidth="167.5" frameHeight="279.5"/>
+	<SubTexture name="sad idle0006.png" x="1006.5" y="1120" width="155.5" height="276" frameX="-9.5" frameY="-3" frameWidth="167.5" frameHeight="279.5"/>
+	<SubTexture name="sad idle0007.png" x="1063" y="839.5" width="155" height="276" frameX="-9.5" frameY="-3" frameWidth="167.5" frameHeight="279.5"/>
+	<SubTexture name="sad idle0008.png" x="1016" y="279.5" width="155" height="277" frameX="-10" frameY="-2" frameWidth="167.5" frameHeight="279.5"/>
+	<SubTexture name="sad idle0009.png" x="1071" y="0.5" width="155" height="277" frameX="-10" frameY="-2" frameWidth="167.5" frameHeight="279.5"/>
+	<SubTexture name="sad idle0010.png" x="907.5" y="0.5" width="155" height="277.5" frameX="-11.5" frameY="-1.5" frameWidth="167.5" frameHeight="279.5"/>
+	<SubTexture name="sad idle0011.png" x="693.5" y="1129" width="155" height="277.5" frameX="-11.5" frameY="-1.5" frameWidth="167.5" frameHeight="279.5"/>
+	<SubTexture name="sad idle0012.png" x="850" y="1120" width="155" height="276.5" frameX="-12.5" frameY="-2" frameWidth="167.5" frameHeight="279.5"/>
+	<SubTexture name="sad idle0013.png" x="906.5" y="1398" width="155" height="276.5" frameX="-12.5" frameY="-2" frameWidth="167.5" frameHeight="279.5"/>
+	<SubTexture name="sad idle0014.png" x="1231" y="835" width="155.5" height="275.5" frameX="-11.5" frameY="-3" frameWidth="167.5" frameHeight="279.5"/>
+	<SubTexture name="sad idle0015.png" x="1240" y="556" width="155.5" height="275.5" frameX="-11.5" frameY="-3" frameWidth="167.5" frameHeight="279.5"/>
+	<SubTexture name="sad left0000.png" x="849.5" y="841.5" width="163" height="277" frameX="-3.5" frameY="-0" frameWidth="170.5" frameHeight="277"/>
+	<SubTexture name="sad left0001.png" x="906.5" y="561" width="163" height="277" frameX="-3.5" frameY="-0" frameWidth="170.5" frameHeight="277"/>
+	<SubTexture name="sad left0002.png" x="1576.5" y="0.5" width="162.5" height="275" frameX="-8" frameY="-2" frameWidth="170.5" frameHeight="277"/>
+	<SubTexture name="sad left0003.png" x="1096.5" y="1674.5" width="162.5" height="275" frameX="-8" frameY="-2" frameWidth="170.5" frameHeight="277"/>
+	<SubTexture name="sad left0004.png" x="1397" y="554.5" width="164.5" height="275" frameX="-3" frameY="-2" frameWidth="170.5" frameHeight="277"/>
+	<SubTexture name="sad left0005.png" x="1510" y="277.5" width="164.5" height="275" frameX="-3" frameY="-2" frameWidth="170.5" frameHeight="277"/>
+	<SubTexture name="sad left0006.png" x="1071" y="558" width="167.5" height="275.5" frameX="-0" frameY="-1.5" frameWidth="170.5" frameHeight="277"/>
+	<SubTexture name="sad left0007.png" x="1172.5" y="279" width="167.5" height="275.5" frameX="-0" frameY="-1.5" frameWidth="170.5" frameHeight="277"/>
+	<SubTexture name="sad left0008.png" x="1240" y="0.5" width="167" height="275.5" frameX="-0.5" frameY="-1.5" frameWidth="170.5" frameHeight="277"/>
+	<SubTexture name="sad left0009.png" x="1341.5" y="277.5" width="167" height="275.5" frameX="-0.5" frameY="-1.5" frameWidth="170.5" frameHeight="277"/>
+	<SubTexture name="sad left0010.png" x="1408.5" y="0.5" width="166.5" height="275.5" frameX="-1" frameY="-1.5" frameWidth="170.5" frameHeight="277"/>
+	<SubTexture name="sad left0011.png" x="1063" y="1397.5" width="166.5" height="275.5" frameX="-1" frameY="-1.5" frameWidth="170.5" frameHeight="277"/>
+	<SubTexture name="sad left0012.png" x="1408.5" y="0.5" width="166.5" height="275.5" frameX="-1" frameY="-1.5" frameWidth="170.5" frameHeight="277"/>
+	<SubTexture name="sad left0013.png" x="1063" y="1397.5" width="166.5" height="275.5" frameX="-1" frameY="-1.5" frameWidth="170.5" frameHeight="277"/>
+	<SubTexture name="sad left0014.png" x="1163.5" y="1117" width="166.5" height="275.5" frameX="-1" frameY="-1.5" frameWidth="170.5" frameHeight="277"/>
+	<SubTexture name="sad right0000.png" x="699" y="1436.5" width="206" height="280.5" frameX="-3.5" frameY="-1.5" frameWidth="209.5" frameHeight="282"/>
+	<SubTexture name="sad right0001.png" x="889" y="1718.5" width="206" height="280.5" frameX="-3.5" frameY="-1.5" frameWidth="209.5" frameHeight="282"/>
+	<SubTexture name="sad right0002.png" x="537" y="567.5" width="202.5" height="280" frameX="-0" frameY="-2" frameWidth="209.5" frameHeight="282"/>
+	<SubTexture name="sad right0003.png" x="703.5" y="0.5" width="202.5" height="280" frameX="-0" frameY="-2" frameWidth="209.5" frameHeight="282"/>
+	<SubTexture name="sad right0004.png" x="332.5" y="1153.5" width="203" height="281.5" frameX="-0" frameY="-0.5" frameWidth="209.5" frameHeight="282"/>
+	<SubTexture name="sad right0005.png" x="494.5" y="1436.5" width="203" height="281.5" frameX="-0" frameY="-0.5" frameWidth="209.5" frameHeight="282"/>
+	<SubTexture name="sad right0006.png" x="480" y="1757.5" width="203" height="282" frameX="-0" frameY="-0" frameWidth="209.5" frameHeight="282"/>
+	<SubTexture name="sad right0007.png" x="684.5" y="1757.5" width="203" height="282" frameX="-0" frameY="-0" frameWidth="209.5" frameHeight="282"/>
+	<SubTexture name="sad right0008.png" x="332.5" y="586.5" width="203" height="282" frameX="-0" frameY="-0" frameWidth="209.5" frameHeight="282"/>
+	<SubTexture name="sad right0009.png" x="499" y="0.5" width="203" height="282" frameX="-0" frameY="-0" frameWidth="209.5" frameHeight="282"/>
+	<SubTexture name="sad right0010.png" x="499" y="284" width="203" height="282" frameX="-0" frameY="-0" frameWidth="209.5" frameHeight="282"/>
+	<SubTexture name="sad right0011.png" x="332.5" y="870" width="203" height="282" frameX="-0" frameY="-0" frameWidth="209.5" frameHeight="282"/>
+	<SubTexture name="sad right0012.png" x="499" y="284" width="203" height="282" frameX="-0" frameY="-0" frameWidth="209.5" frameHeight="282"/>
+	<SubTexture name="sad right0013.png" x="332.5" y="870" width="203" height="282" frameX="-0" frameY="-0" frameWidth="209.5" frameHeight="282"/>
+	<SubTexture name="sad right0014.png" x="499" y="284" width="203" height="282" frameX="-0" frameY="-0" frameWidth="209.5" frameHeight="282"/>
+	<SubTexture name="sad up0000.png" x="0.5" y="606.5" width="162" height="294.5" frameX="-0.5" frameY="-0" frameWidth="165" frameHeight="294.5"/>
+	<SubTexture name="sad up0001.png" x="0.5" y="606.5" width="162" height="294.5" frameX="-0.5" frameY="-0" frameWidth="165" frameHeight="294.5"/>
+	<SubTexture name="sad up0002.png" x="328" y="1465.5" width="165" height="290.5" frameX="-0" frameY="-4" frameWidth="165" frameHeight="294.5"/>
+	<SubTexture name="sad up0003.png" x="328" y="1465.5" width="165" height="290.5" frameX="-0" frameY="-4" frameWidth="165" frameHeight="294.5"/>
+	<SubTexture name="sad up0004.png" x="0.5" y="1488.5" width="162.5" height="291.5" frameX="-1.5" frameY="-3" frameWidth="165" frameHeight="294.5"/>
+	<SubTexture name="sad up0005.png" x="0.5" y="1488.5" width="162.5" height="291.5" frameX="-1.5" frameY="-3" frameWidth="165" frameHeight="294.5"/>
+	<SubTexture name="sad up0006.png" x="164.5" y="1488.5" width="162" height="291.5" frameX="-2" frameY="-3" frameWidth="165" frameHeight="294.5"/>
+	<SubTexture name="sad up0007.png" x="164.5" y="1488.5" width="162" height="291.5" frameX="-2" frameY="-3" frameWidth="165" frameHeight="294.5"/>
+	<SubTexture name="sad up0008.png" x="169" y="879.5" width="162" height="291.5" frameX="-2" frameY="-3" frameWidth="165" frameHeight="294.5"/>
+	<SubTexture name="sad up0009.png" x="169" y="879.5" width="162" height="291.5" frameX="-2" frameY="-3" frameWidth="165" frameHeight="294.5"/>
+	<SubTexture name="sad up0010.png" x="169" y="1172.5" width="162" height="291.5" frameX="-2" frameY="-3" frameWidth="165" frameHeight="294.5"/>
+	<SubTexture name="sad up0011.png" x="169" y="1172.5" width="162" height="291.5" frameX="-2" frameY="-3" frameWidth="165" frameHeight="294.5"/>
+	<SubTexture name="sad up0012.png" x="169" y="1172.5" width="162" height="291.5" frameX="-2" frameY="-3" frameWidth="165" frameHeight="294.5"/>
+	<SubTexture name="sad up0013.png" x="169" y="1172.5" width="162" height="291.5" frameX="-2" frameY="-3" frameWidth="165" frameHeight="294.5"/>
+	<SubTexture name="sad up0014.png" x="169" y="1172.5" width="162" height="291.5" frameX="-2" frameY="-3" frameWidth="165" frameHeight="294.5"/>
+	<SubTexture name="ugh0000.png" x="1544.5" y="833" width="156" height="245" frameX="-10.5" frameY="-60" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0001.png" x="1563" y="554" width="156" height="245" frameX="-10.5" frameY="-60" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0002.png" x="0.5" y="0.5" width="159.5" height="301.5" frameX="-3.5" frameY="-0" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0003.png" x="0.5" y="303.5" width="159.5" height="301.5" frameX="-3.5" frameY="-0" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0004.png" x="161.5" y="0.5" width="167.5" height="291.5" frameX="-0" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0005.png" x="161.5" y="293.5" width="167.5" height="291.5" frameX="-0" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0006.png" x="0.5" y="902.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0007.png" x="164" y="586.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0008.png" x="330.5" y="0.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0009.png" x="330.5" y="293.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0010.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0011.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0012.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0013.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0014.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0015.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0016.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0017.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0018.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0019.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0020.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0021.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0022.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0023.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0024.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0025.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0026.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0027.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0028.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0029.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0030.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0031.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0032.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0033.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0034.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0035.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0036.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0037.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0038.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0039.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0040.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0041.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0042.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0043.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0044.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0045.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0046.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0047.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0048.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0049.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0050.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0051.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0052.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0053.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0054.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0055.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0056.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0057.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0058.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0059.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0060.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0061.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0062.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0063.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0064.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0065.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0066.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0067.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0068.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0069.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0070.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0071.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0072.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0073.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0074.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0075.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0076.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0077.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0078.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0079.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0080.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0081.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0082.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0083.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0084.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0085.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0086.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0087.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0088.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0089.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0090.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0091.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0092.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0093.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0094.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0095.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0096.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0097.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0098.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0099.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0100.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0101.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0102.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0103.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0104.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0105.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0106.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0107.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0108.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0109.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0110.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0111.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0112.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0113.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0114.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0115.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0116.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0117.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0118.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0119.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0120.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0121.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0122.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0123.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0124.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0125.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0126.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0127.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0128.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0129.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0130.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0131.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0132.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0133.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0134.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0135.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0136.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0137.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0138.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0139.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0140.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0141.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0142.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0143.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0144.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0145.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0146.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0147.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0148.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0149.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0150.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0151.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0152.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0153.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0154.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0155.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0156.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0157.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0158.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0159.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0160.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0161.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0162.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0163.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0164.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0165.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0166.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0167.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0168.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0169.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0170.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0171.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0172.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0173.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0174.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0175.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0176.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0177.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0178.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0179.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0180.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0181.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0182.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0183.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0184.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0185.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0186.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0187.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0188.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0189.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0190.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0191.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0192.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0193.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0194.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0195.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0196.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0197.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0198.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0199.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0200.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0201.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0202.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0203.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0204.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0205.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0206.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0207.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0208.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0209.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0210.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0211.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0212.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0213.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0214.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0215.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0216.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0217.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0218.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0219.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0220.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0221.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0222.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0223.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0224.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0225.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0226.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0227.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0228.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0229.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0230.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0231.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0232.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0233.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0234.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0235.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0236.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0237.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0238.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+	<SubTexture name="ugh0239.png" x="0.5" y="1195.5" width="167" height="291.5" frameX="-0.5" frameY="-10" frameWidth="168" frameHeight="305"/>
+</TextureAtlas>

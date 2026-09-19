@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="sky-mad-reduxpixel.png" width="141" height="96">
+	<SubTexture name="confirm-hold0000" x="50" y="1" width="38" height="41" frameX="-0" frameY="-5" frameWidth="39" frameHeight="46"/>
+	<SubTexture name="confirm0000" x="1" y="59" width="37" height="36" frameX="-2" frameY="-8" frameWidth="39" frameHeight="46"/>
+	<SubTexture name="confirm0001" x="103" y="1" width="37" height="37" frameX="-1" frameY="-9" frameWidth="39" frameHeight="46"/>
+	<SubTexture name="confirm0002" x="1" y="1" width="34" height="43" frameX="-2" frameY="-0" frameWidth="39" frameHeight="46"/>
+	<SubTexture name="confirm0003" x="50" y="1" width="38" height="41" frameX="-0" frameY="-5" frameWidth="39" frameHeight="46"/>
+	<SubTexture name="idle0000" x="1" y="59" width="37" height="36" frameX="-2" frameY="-8" frameWidth="39" frameHeight="46"/>
+</TextureAtlas>

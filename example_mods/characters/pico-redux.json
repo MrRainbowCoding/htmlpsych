@@ -1,0 +1,190 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-33,
+				-54
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "pico idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-32,
+				-53
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "pico left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-49,
+				-61
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "pico down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-35,
+				-50
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "pico up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-32,
+				-57
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "pico right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-32,
+				-53
+			],
+			"anim": "singLEFT-alt",
+			"fps": 24,
+			"name": "pico alt left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-49,
+				-63
+			],
+			"anim": "singDOWN-alt",
+			"fps": 24,
+			"name": "pico alt down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-34,
+				-53
+			],
+			"anim": "singUP-alt",
+			"fps": 24,
+			"name": "pico alt up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-37,
+				-53
+			],
+			"anim": "singRIGHT-alt",
+			"fps": 24,
+			"name": "pico alt right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-28,
+				-53
+			],
+			"anim": "singLEFTmiss",
+			"fps": 24,
+			"name": "pico miss left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-43,
+				-63
+			],
+			"anim": "singDOWNmiss",
+			"fps": 24,
+			"name": "pico miss down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-38,
+				-50
+			],
+			"anim": "singUPmiss",
+			"fps": 24,
+			"name": "pico miss up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-26,
+				-53
+			],
+			"anim": "singRIGHTmiss",
+			"fps": 24,
+			"name": "pico miss right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-36,
+				-51
+			],
+			"anim": "mock",
+			"fps": 24,
+			"name": "pico mock up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-34,
+				-53
+			],
+			"anim": "ok",
+			"fps": 24,
+			"name": "pico ok",
+			"indices": []
+		}
+	],
+	"vocals_file": "pico",
+	"no_antialiasing": false,
+	"image": "characters/redux/pico redux",
+	"position": [
+		0,
+		20
+	],
+	"healthicon": "pico",
+	"flip_x": true,
+	"healthbar_colors": [
+		183,
+		216,
+		85
+	],
+	"camera_position": [
+		-330,
+		330
+	],
+	"sing_duration": 8,
+	"scale": 0.8,
+	"_editor_isPlayer": true
+}

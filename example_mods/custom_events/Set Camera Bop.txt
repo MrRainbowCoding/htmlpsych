@@ -1,0 +1,2 @@
+Value 1: Interval
+Value 2: Intensity

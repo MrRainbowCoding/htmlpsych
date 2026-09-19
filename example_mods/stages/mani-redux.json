@@ -1,0 +1,15 @@
+{
+	"directory": "images/stages/attic/",
+	"defaultZoom": 0.75,
+	"stageUI": "",
+
+	"boyfriend": [981.6, 350],
+	"girlfriend": [536.2, 30],
+	"opponent": [234.5, 114],
+	"hide_girlfriend": false,
+
+	"camera_boyfriend": [-200, -50],
+	"camera_opponent": [-50, 100],
+	"camera_girlfriend": [150, 100],
+	"camera_speed": 1
+}

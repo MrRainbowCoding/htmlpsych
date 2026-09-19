@@ -1,0 +1,280 @@
+{
+  "version": "1.0.2",
+  "name": "Shift (Wife Forever Redux)",
+  "props": [
+    {
+      "alpha": 1,
+      "angle": 0,
+      "animType": "sparrow",
+      "animations": [      ],
+      "assetPath": "stages/WF/shift",
+      "blend": "",
+      "color": "#FFFFFF",
+      "danceEvery": 0,
+      "flipX": false,
+      "flipY": false,
+      "isPixel": false,
+      "name": "shiftback",
+      "position": [
+        -1667,
+        -1002
+      ],
+      "scale": [
+	      1.8,
+	      1
+      ],
+      "scroll": [
+        1,
+        1
+      ],
+      "startingAnimation": "",
+      "zIndex": 10
+    },
+    {
+      "alpha": 1,
+      "angle": 0,
+      "animType": "sparrow",
+      "animations": [      ],
+      "assetPath": "stages/WF/Ground",
+      "blend": "",
+      "color": "#FFFFFF",
+      "danceEvery": 0,
+      "flipX": false,
+      "flipY": false,
+      "isPixel": false,
+      "name": "shiftground",
+      "position": [
+        -1672,
+        358
+      ],
+      "scale": [
+        1.8,
+        1
+      ],
+      "scroll": [
+        1,
+        1
+      ],
+      "startingAnimation": "",
+      "zIndex": 20
+    },
+    {
+      "alpha": 0.7,
+      "angle": 0,
+      "animType": "sparrow",
+      "animations": [
+        {
+          "assetPath": null,
+          "flipX": false,
+          "flipY": false,
+          "frameIndices": [          ],
+          "frameRate": 4,
+          "looped": true,
+          "name": "idle",
+          "offsets": [
+            0,
+            0
+          ],
+          "prefix": "clouds"
+        }
+      ],
+      "assetPath": "stages/WF/clouds_lineboil",
+      "blend": "",
+      "color": "#FFFFFF",
+      "danceEvery": 0,
+      "flipX": false,
+      "flipY": false,
+      "isPixel": false,
+      "name": "clouds",
+      "position": [
+        -500,
+        -200
+      ],
+      "scale": 1,
+      "scroll": [
+        0.6,
+        1
+      ],
+      "startingAnimation": "idle",
+      "zIndex": 30
+    },
+    {
+      "alpha": 1,
+      "angle": 0,
+      "animType": "sparrow",
+      "animations": [
+        {
+          "assetPath": null,
+          "flipX": false,
+          "flipY": false,
+          "frameIndices": [          ],
+          "frameRate": 4,
+          "looped": true,
+          "name": "idle",
+          "offsets": [
+            0,
+            0
+          ],
+          "prefix": "bushes"
+        }
+      ],
+      "assetPath": "stages/WF/bushes_lineboil",
+      "blend": "",
+      "color": "#FFFFFF",
+      "danceEvery": 0,
+      "flipX": false,
+      "flipY": false,
+      "isPixel": false,
+      "name": "bushes",
+      "position": [
+        -513,
+        170
+      ],
+      "scale": 1,
+      "scroll": [
+        0.8,
+        1
+      ],
+      "startingAnimation": "idle",
+      "zIndex": 40
+    },
+    {
+      "alpha": 1,
+      "angle": 0,
+      "animType": "sparrow",
+      "animations": [
+        {
+          "assetPath": null,
+          "flipX": false,
+          "flipY": false,
+          "frameIndices": [          ],
+          "frameRate": 4,
+          "looped": true,
+          "name": "idle",
+          "offsets": [
+            0,
+            0
+          ],
+          "prefix": "tree"
+        }
+      ],
+      "assetPath": "stages/WF/tree_lineboil",
+      "blend": "",
+      "color": "#FFFFFF",
+      "danceEvery": 0,
+      "flipX": false,
+      "flipY": false,
+      "isPixel": false,
+      "name": "tree",
+      "position": [
+        40,
+        -331
+      ],
+      "scale": 1,
+      "scroll": [
+        1,
+        1
+      ],
+      "startingAnimation": "idle",
+      "zIndex": 50
+    },
+    {
+      "alpha": 1,
+      "angle": 0,
+      "animType": "sparrow",
+      "animations": [
+        {
+          "assetPath": null,
+          "flipX": false,
+          "flipY": false,
+          "frameIndices": [          ],
+          "frameRate": 4,
+          "looped": true,
+          "name": "idle",
+          "offsets": [
+            0,
+            0
+          ],
+          "prefix": "hilltop"
+        }
+      ],
+      "assetPath": "stages/WF/wifeforever_lineboil",
+      "blend": "",
+      "color": "#FFFFFF",
+      "danceEvery": 0,
+      "flipX": false,
+      "flipY": false,
+      "isPixel": false,
+      "name": "hill",
+      "position": [
+        -510,
+        372
+      ],
+      "scale": 1,
+      "scroll": [
+        1,
+        1
+      ],
+      "startingAnimation": "idle",
+      "zIndex": 60
+    }
+  ],
+  "characters": {
+    "bf": {
+      "alpha": 1,
+      "angle": 0,
+      "cameraOffsets": [
+        -100,
+        -200
+      ],
+      "position": [
+        1081.6,
+        850
+      ],
+      "scale": 1,
+      "scroll": [
+        1,
+        1
+      ],
+      "zIndex": 300
+    },
+    "dad": {
+      "alpha": 1,
+      "angle": 0,
+      "cameraOffsets": [
+        200,
+        -100
+      ],
+      "position": [
+        300,
+        820
+      ],
+      "scale": 1,
+      "scroll": [
+        1,
+        1
+      ],
+      "zIndex": 200
+    },
+    "gf": {
+      "alpha": 1,
+      "angle": 0,
+      "cameraOffsets": [
+        0,
+        0
+      ],
+      "position": [
+        736.2,
+        530
+      ],
+      "scale": 1,
+      "scroll": [
+        1,
+        1
+      ],
+      "zIndex": 100
+    }
+  },
+  "cameraZoom": 0.75,
+  "directory": "shared"
+}

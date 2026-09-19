@@ -1,0 +1,172 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				9,
+				-4
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "bf idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				64,
+				-4
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "bf left0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				27,
+				-64
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "DownBF0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-47,
+				48
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "UpBf0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-17,
+				2
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "BfRight0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				46,
+				21
+			],
+			"anim": "singLEFTmiss",
+			"fps": 24,
+			"name": "bf left Miss0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				29,
+				-26
+			],
+			"anim": "singDOWNmiss",
+			"fps": 24,
+			"name": "DownBF Miss0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-43,
+				45
+			],
+			"anim": "singUPmiss",
+			"fps": 24,
+			"name": "UpBf Miss0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-12,
+				36
+			],
+			"anim": "singRIGHTmiss",
+			"fps": 24,
+			"name": "BfRight Miss0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				268,
+				54
+			],
+			"anim": "firstDeath",
+			"fps": 24,
+			"name": "bf dies",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				268,
+				42
+			],
+			"anim": "deathLoop",
+			"fps": 24,
+			"name": "bf death loop",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				268,
+				60
+			],
+			"anim": "deathConfirm",
+			"fps": 24,
+			"name": "bf death confirm",
+			"indices": [
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16
+			]
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/redux/Boyfriend_Sprites",
+	"position": [
+		130,
+		180
+	],
+	"healthicon": "bf",
+	"flip_x": true,
+	"healthbar_colors": [
+		49,
+		176,
+		209
+	],
+	"camera_position": [
+		70,
+		-70
+	],
+	"sing_duration": 8,
+	"scale": 1.6,
+	"_editor_isPlayer": true
+}

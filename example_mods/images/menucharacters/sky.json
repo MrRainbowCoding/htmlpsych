@@ -1,0 +1,10 @@
+{
+    "image": "modsky_story_assets",
+    "position": [
+        90,
+        100
+    ],
+    "scale": 0.65,
+    "idle_anim": "Idle",
+    "confirm_anim": "GF Dancing Beat WHITE"
+}

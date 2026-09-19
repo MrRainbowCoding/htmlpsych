@@ -1,0 +1,2 @@
+Value 1: Target Zoom, Duration (In Steps), Ease
+Value 2: Coming Soon

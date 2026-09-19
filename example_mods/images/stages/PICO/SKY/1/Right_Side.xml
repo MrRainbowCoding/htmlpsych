@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="Right_Side.png" width="4096" height="1024">
+	<SubTexture name="Right_Side0000.png" x="0.5" y="0.5" width="687" height="720" frameX="-2" frameY="-0" frameWidth="690" frameHeight="721"/>
+	<SubTexture name="Right_Side0001.png" x="689" y="0.5" width="687" height="720" frameX="-2" frameY="-0" frameWidth="690" frameHeight="721"/>
+	<SubTexture name="Right_Side0002.png" x="1377.5" y="0.5" width="687" height="720" frameX="-2" frameY="-0" frameWidth="690" frameHeight="721"/>
+</TextureAtlas>
