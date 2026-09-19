@@ -24,3 +24,14 @@ export/*
 !.vscode/extensions.json
 .vs/*
 todo.txt
+example_mods/characters
+example_mods/music
+example_mods/sounds
+example_mods/images
+example_mods/custom_notetypes
+example_mods/custom_events
+example_mods/data
+example_mods/fonts
+example_mods/videos
+example_mods/pack.json
+example_mods/pack.png
