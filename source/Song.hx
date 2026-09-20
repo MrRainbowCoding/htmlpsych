@@ -179,6 +179,14 @@ class Song
 	{
 		var swagShit:SwagSong = cast Json.parse(rawJson).song; //actual song
 		var tempSong:Dynamic = cast Json.parse(rawJson).song; //copy to check for other variables
+		if (swagShit.song == null)
+			swagShit.song = '';
+		if (swagShit.notes == null)
+			swagShit.notes = [];
+		if (swagShit.events == null)
+			swagShit.events = [];
+		if (tempSong.notes == null)
+			tempSong.notes = [];
 
 		if (swagShit.gfVersion == null) {
 			if (tempSong.player3 != null) {

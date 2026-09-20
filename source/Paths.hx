@@ -413,9 +413,30 @@ class Paths
 
 	public static var currentTrackedSounds:Map<String, Sound> = [];
 	public static function returnSound(path:String, key:String, ?library:String) {
-		var gottenPath:String = getPath('$path/$key.$SOUND_EXT', SOUND, library);
-		if (!existsPath('$path/$key.$SOUND_EXT', SOUND, library)) {
-			trace('oh no its returning null NOOOO: $gottenPath');
+		var gottenPath:String = null;
+		var keys:Array<String> = [key];
+		if (key != key.toLowerCase())
+			keys.push(key.toLowerCase());
+		var extensions:Array<String> = [SOUND_EXT];
+		var alternateExtension:String = #if web 'ogg' #else 'mp3' #end;
+		if (alternateExtension != SOUND_EXT)
+			extensions.push(alternateExtension);
+		for (candidateKey in keys)
+		{
+			for (extension in extensions)
+			{
+				var candidatePath:String = '$path/$candidateKey.$extension';
+				if (existsPath(candidatePath, SOUND, library))
+				{
+					gottenPath = getPath(candidatePath, SOUND, library);
+					break;
+				}
+			}
+			if (gottenPath != null)
+				break;
+		}
+		if (gottenPath == null) {
+			trace('oh no its returning null NOOOO: $path/$key.$SOUND_EXT');
 			return null;
 		}
 		if (!currentTrackedSounds.exists(gottenPath))
@@ -446,7 +467,7 @@ class Paths
 	}
 	#end
 
-	// Web builds do not expose a synchronous directory API.
+	// Web builds enumerate the embedded asset manifest instead of the filesystem.
 	static public function readDirectory(folder:String):Array<String>
 	{
 		#if sys
@@ -454,7 +475,19 @@ class Paths
 			return FileSystem.readDirectory(folder);
 		return [];
 		#else
-		return [];
+		var prefix:String = folder.endsWith('/') ? folder : folder + '/';
+		var found:Map<String, Bool> = [];
+		for (asset in OpenFlAssets.list())
+		{
+			var id:String = StringTools.urlDecode(asset);
+			if (id.startsWith(prefix))
+			{
+				var name:String = id.substr(prefix.length).split('/')[0];
+				if (name.length > 0)
+					found.set(name, true);
+			}
+		}
+		return [for (name in found.keys()) name];
 		#end
 	}
 
@@ -463,6 +496,10 @@ class Paths
 		#if sys
 		return FileSystem.exists(folder) && FileSystem.isDirectory(folder);
 		#else
+		var prefix:String = folder.endsWith('/') ? folder : folder + '/';
+		for (asset in OpenFlAssets.list())
+			if (StringTools.urlDecode(asset).startsWith(prefix))
+				return true;
 		return false;
 		#end
 	}

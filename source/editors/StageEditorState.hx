@@ -414,7 +414,6 @@ class StageEditorState extends MusicBeatState {
 
     var stageList:Array<String> = [];
     function reloadStageDropDown() {
-		#if sys
 		stageList = [];
         var stagesLoaded:Map<String, Bool> = new Map();
 		var directories:Array<String> = [Paths.getPreloadPath('stages/')];
@@ -423,10 +422,14 @@ class StageEditorState extends MusicBeatState {
 		#end
 		for (i in 0...directories.length) {
 			var directory:String = directories[i];
-			if (FileSystem.exists(directory)) {
-				for (file in FileSystem.readDirectory(directory)) {
+            if (Paths.directoryExists(directory)) {
+                for (file in Paths.readDirectory(directory)) {
 					var path = Path.join([directory, file]);
-					if (!FileSystem.isDirectory(path) && file.endsWith('.json')) {
+                    #if sys
+                    if (FileSystem.isDirectory(path))
+                        continue;
+                    #end
+                    if (file.endsWith('.json')) {
 						var charToCheck:String = file.substr(0, file.length - 5);
 						if (!stagesLoaded.exists(charToCheck)) {
                             stageList.push(charToCheck);
@@ -436,9 +439,6 @@ class StageEditorState extends MusicBeatState {
 				}
 			}
 		}
-		#else
-		stageList = CoolUtil.coolTextFile(Paths.txt('stageList'));
-		#end
 
 		stageDropDown.setData(FlxUIDropDownMenu.makeStrIdLabelArray(stageList, true));
 		stageDropDown.selectedLabel = curStage;

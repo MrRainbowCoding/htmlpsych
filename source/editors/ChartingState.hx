@@ -511,7 +511,7 @@ class ChartingState extends MusicBeatState
 			var directory:String = directories[i];
 			if (FileSystem.exists(directory)) {
 				for (file in FileSystem.readDirectory(directory)) {
-					var path = Path.join([directory, file]);
+					var path = directory + file;
 					if (!FileSystem.isDirectory(path) && file.endsWith('.json')) {
 						var charToCheck:String = file.substr(0, file.length - 5);
 						if (!charToCheck.endsWith('-dead') && !tempMap.exists(charToCheck)) {
@@ -563,13 +563,16 @@ class ChartingState extends MusicBeatState
 			}
 			tempMap.set(stageToCheck, true);
 		}
-		#if sys
 		for (i in 0...directories.length) {
 			var directory:String = directories[i];
-			if (FileSystem.exists(directory)) {
-				for (file in FileSystem.readDirectory(directory)) {
-					var path = Path.join([directory, file]);
-					if (!FileSystem.isDirectory(path) && file.endsWith('.json')) {
+			if (Paths.directoryExists(directory)) {
+				for (file in Paths.readDirectory(directory)) {
+					var path = directory + file;
+					#if sys
+					if (FileSystem.isDirectory(path))
+						continue;
+					#end
+					if (file.endsWith('.json')) {
 						var stageToCheck:String = file.substr(0, file.length - 5);
 						if (!tempMap.exists(stageToCheck)) {
 							tempMap.set(stageToCheck, true);
@@ -579,7 +582,6 @@ class ChartingState extends MusicBeatState
 				}
 			}
 		}
-		#end
 
 		if (stages.length < 1) stages.push('stage');
 
