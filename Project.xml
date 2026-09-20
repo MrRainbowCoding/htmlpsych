@@ -78,9 +78,9 @@
 	<!-- DONT ENABLE THIS -->
 	<define name="CHECK_FOR_UPDATES" if="desktop officialBuild" />
 
-	<!-- <define name="PRELOAD_ALL" /> -->
-	<define name="PRELOAD_ALL" unless="web" />
+	<define name="PRELOAD_ALL" />
 	<define name="NO_PRELOAD_ALL" unless="PRELOAD_ALL" />
+	<haxedef name="force-html5-audio" if="html5" />
 
 	<library name="videos" preload="true" />
 	<library name="songs" preload="true" />
@@ -238,4 +238,6 @@
 	<icon path="art/icon64.png" size='64' />
 	<icon path="art/iconOG.png" />
 	<dependency path="assets/shared/js/fengari-web.js" type="javascript" if="html5" />
+	<template path="templates" if="html5" />
+	<postbuild command="node scripts/bundle_html5_assets.js" if="html5" />
 </project>

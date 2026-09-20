@@ -1700,8 +1700,6 @@ class ChartingState extends MusicBeatState
 			curSec = 0;
 			updateGrid();
 			updateSectionUI();
-			vocals.play();
-			vocalsDad.play();
 		};
 	}
 

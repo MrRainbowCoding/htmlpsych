@@ -1,12 +1,9 @@
-# NOTE: This engine is abandoned! If there are any bugs or glitches, they'll be left unfixed. I'm keeping it up for archival purposes and because some mods have used it.
-
-![Psych Engine Extra](https://user-images.githubusercontent.com/85134252/153526241-9f265b56-ffd1-4452-bb61-c7500471a910.png)
-
-# Friday Night Funkin' - Psych Engine Extra
-Modified version of Psych Engine adding more stuff, most notably higher key amounts, time signatures, and Hscript support.
+# Friday Night Funkin' - HTML Psych Engine
+Modified version of Psych Engine Extra with HTML5 support!
 
 ## Credits:
-* Starmapo - Programmer and Artist
+* Starmapo - PE Extra Programmer and Artist
+* Mr. Rainbow - HTML Psych Creator
 
 ## Special Thanks:
 * KadeDev & GitHub Contributors - Made Kade Engine (some code and ideas are from there)
@@ -29,7 +26,7 @@ Modified version of Psych Engine adding more stuff, most notably higher key amou
 * Nebula the Zorua - LUA JIT Fork and some Lua reworks
 _____________________________________
 
-# New Features
+# New Features (from OG Psych Engine)
 * Custom key amounts (currently 1K to 13K)
 * Custom time signatures (1-100/1-64)
 * Hscript compatibility
@@ -38,6 +35,7 @@ _____________________________________
 * Separate voices for the player and the opponent (by adding a 'VoicesOpponent' or 'VoicesDad' file)
 * Gameplay Changers: Play as the opponent, change song (not chart, SONG) speed, demo mode (showcase gameplay)
 * Go to options menu from the pause menu (and go right back to game after you're done!)
+
 
 # New Options
 * Note underlays

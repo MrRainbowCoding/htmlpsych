@@ -20,7 +20,7 @@ class OutdatedState extends MusicBeatState
 
 		warnText = new FlxText(0, 0, FlxG.width,
 			'Sup bro, looks like you\'re running an   \n
-			outdated version of Psych Engine Extra (${MainMenuState.psychEngineExtraVersion}),\n
+			outdated version of HTML Psych (${MainMenuState.psychEngineExtraVersion}),\n
 			please update to ${TitleState.updateVersion}!\n
 			Press ESCAPE to proceed anyway.\n
 			\n
@@ -36,7 +36,7 @@ class OutdatedState extends MusicBeatState
 		if (!leftState) {
 			if (controls.ACCEPT || FlxG.mouse.justPressed) {
 				leftState = true;
-				CoolUtil.browserLoad("https://github.com/Starmapo/FNF-PsychEngine-Extra/releases");
+				CoolUtil.browserLoad("https://github.com/MrRainbowCoding/htmlpsych");
 			}
 			else if(controls.BACK) {
 				leftState = true;

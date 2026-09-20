@@ -11,7 +11,8 @@ class MusicBeatSubState extends FlxSubState
 	var lastScroll:FlxPoint = FlxPoint.get();
 	public function new()
 	{
-		lastScroll.copyFrom(FlxG.camera.scroll);
+		if (FlxG.camera != null && FlxG.camera.scroll != null)
+			lastScroll.copyFrom(FlxG.camera.scroll);
 		super();
 		closeCallback = onClose;
 	}
@@ -69,7 +70,7 @@ class MusicBeatSubState extends FlxSubState
 	}
 
 	function onClose() {
-		if (resetCameraOnClose) {
+		if (resetCameraOnClose && FlxG.camera != null && FlxG.camera.scroll != null && lastScroll != null) {
 			FlxG.camera.follow(null);
 			FlxG.camera.scroll.set(lastScroll.x, lastScroll.y);
 		}

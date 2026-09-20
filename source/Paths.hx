@@ -435,16 +435,65 @@ class Paths
 			if (gottenPath != null)
 				break;
 		}
+		if (gottenPath == null)
+		{
+			for (candidateKey in keys)
+			{
+				for (extension in extensions)
+				{
+					var testPaths:Array<String> = [
+						(library != null ? '$library:assets/$library/$path/$candidateKey.$extension' : 'assets/$path/$candidateKey.$extension'),
+						'assets/songs/$path/$candidateKey.$extension',
+						'mods/songs/$path/$candidateKey.$extension',
+						'mods/$path/$candidateKey.$extension'
+					];
+					for (tp in testPaths)
+					{
+						var check = tp;
+						if (check.indexOf(':') != -1) check = check.substring(check.indexOf(':') + 1);
+						if (OpenFlAssets.exists(tp, SOUND) || OpenFlAssets.exists(check, SOUND))
+						{
+							gottenPath = tp;
+							break;
+						}
+					}
+					if (gottenPath != null) break;
+				}
+				if (gottenPath != null) break;
+			}
+		}
 		if (gottenPath == null) {
 			trace('oh no its returning null NOOOO: $path/$key.$SOUND_EXT');
 			return null;
 		}
 		if (!currentTrackedSounds.exists(gottenPath))
+		{
 			#if sys
 			currentTrackedSounds.set(gottenPath, Sound.fromFile('./' + gottenPath.substring(gottenPath.indexOf(':') + 1)));
 			#else
-			currentTrackedSounds.set(gottenPath, OpenFlAssets.getSound(gottenPath));
+			var sound:Sound = OpenFlAssets.getSound(gottenPath);
+			#if (js && html5)
+			if (sound == null || untyped (sound.__buffer == null || sound.__buffer.get_src() == null))
+			{
+				var rawPath:String = gottenPath;
+				if (rawPath.indexOf(':') != -1)
+					rawPath = rawPath.substring(rawPath.indexOf(':') + 1);
+				var buffer = lime.media.AudioBuffer.fromFile(rawPath);
+				if (buffer != null)
+				{
+					#if js
+					if (untyped buffer.__srcHowl != null)
+					{
+						js.Syntax.code("if (typeof {0}.load === 'function') {0}.load()", untyped buffer.__srcHowl);
+					}
+					#end
+					sound = Sound.fromAudioBuffer(buffer);
+				}
+			}
 			#end
+			currentTrackedSounds.set(gottenPath, sound);
+			#end
+		}
 		if (!localTrackedAssets.contains(gottenPath)) localTrackedAssets.push(gottenPath);
 		return currentTrackedSounds.get(gottenPath);
 	}

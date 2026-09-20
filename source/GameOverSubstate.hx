@@ -169,7 +169,8 @@ class GameOverSubstate extends MusicBeatSubState
 
 	override public function destroy() {
 		boyfriend = FlxDestroyUtil.destroy(boyfriend);
-		camGame = FlxDestroyUtil.destroy(camGame);
+		// camGame was set as FlxG.camera; FlxG.cameras will manage it to avoid destroying the active camera's scroll
+		camGame = null;
 		camFollow = FlxDestroyUtil.put(camFollow);
 		camFollowPos = FlxDestroyUtil.destroy(camFollowPos);
 		super.destroy();

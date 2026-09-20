@@ -699,6 +699,31 @@ class PvPPlayState extends MusicBeatState {
 
 		if (FlxG.sound.music != null && FlxG.sound.music.playing)
 			setSongPitch();
+
+		if (vocals != null && FlxG.sound.music != null)
+		{
+			var instIsOn:Bool = FlxG.sound.music.playing && FlxG.sound.music.volume > 0 && !paused && !startingSong && !endingSong;
+			if (!instIsOn)
+			{
+				if (vocals.playing)
+					vocals.pause();
+				if (vocalsDad != null && vocalsDad.playing)
+					vocalsDad.pause();
+			}
+			else if (PlayState.SONG.needsVoices)
+			{
+				if (!vocals.playing && (vocals.length <= 0 || Conductor.songPosition < vocals.length))
+				{
+					vocals.play();
+					vocals.time = FlxG.sound.music.time;
+				}
+				if (foundDadVocals && vocalsDad != null && !vocalsDad.playing && (vocalsDad.length <= 0 || Conductor.songPosition < vocalsDad.length))
+				{
+					vocalsDad.play();
+					vocalsDad.time = FlxG.sound.music.time;
+				}
+			}
+		}
 		
 		if (playbackRate != 1 && startedCountdown && !endingSong && !transitioning && FlxG.sound.music != null && FlxG.sound.music.length - Conductor.songPosition <= 20) {
 			Conductor.songPosition = FlxG.sound.music.length;
@@ -1036,9 +1061,10 @@ class PvPPlayState extends MusicBeatState {
 	override function stepHit()
 	{
 		super.stepHit();
-		if (generatedMusic && (Math.abs(FlxG.sound.music.time - Conductor.songPosition) > 20 * playbackRate
-			|| (PlayState.SONG.needsVoices && ((Math.abs(vocals.time - Conductor.songPosition) > 20 * playbackRate) 
-			|| (foundDadVocals && Math.abs(vocalsDad.time - Conductor.songPosition) > 20 * playbackRate)))))
+		var resyncLimit:Float = #if (web || html5) 100.0 #else 20.0 #end * playbackRate;
+		if (generatedMusic && (Math.abs(FlxG.sound.music.time - Conductor.songPosition) > resyncLimit
+			|| (PlayState.SONG.needsVoices && ((Math.abs(vocals.time - Conductor.songPosition) > resyncLimit) 
+			|| (foundDadVocals && Math.abs(vocalsDad.time - Conductor.songPosition) > resyncLimit)))))
 			resyncVocals();
 
 		if (curStep == lastStepHit)
@@ -1254,7 +1280,14 @@ class PvPPlayState extends MusicBeatState {
 
 	function resyncVocals():Void
 	{
-		if (FlxG.sound.music == null || vocals == null || startingSong || endingSong || endingTimer != null) return;
+		if (FlxG.sound.music == null || vocals == null || startingSong || endingSong || endingTimer != null || paused) return;
+
+		if (!FlxG.sound.music.playing || FlxG.sound.music.volume <= 0)
+		{
+			vocals.pause();
+			if (vocalsDad != null) vocalsDad.pause();
+			return;
+		}
 
 		if (playbackRate < 1) FlxG.sound.music.pause();
 		vocals.pause();
@@ -1267,12 +1300,12 @@ class PvPPlayState extends MusicBeatState {
 			FlxG.sound.music.time = Conductor.songPosition;
 			FlxG.sound.music.play();
 		}
-		if (Conductor.songPosition <= vocals.length)
+		if (vocals.length <= 0 || Conductor.songPosition <= vocals.length)
 		{
 			vocals.time = Conductor.songPosition;
 			vocals.play();
 		}
-		if (Conductor.songPosition <= vocalsDad.length)
+		if (vocalsDad.length <= 0 || Conductor.songPosition <= vocalsDad.length)
 		{
 			vocalsDad.time = Conductor.songPosition;
 			vocalsDad.play();
@@ -2333,12 +2366,12 @@ class PvPPlayState extends MusicBeatState {
 		FlxG.sound.music.time = time;
 		FlxG.sound.music.play();
 
-		if (time <= vocals.length)
+		if (vocals.length <= 0 || time <= vocals.length)
 		{
 			vocals.time = time;
 			vocals.play();
 		}
-		if (time <= vocalsDad.length)
+		if (vocalsDad.length <= 0 || time <= vocalsDad.length)
 		{
 			vocalsDad.time = time;
 			vocalsDad.play();

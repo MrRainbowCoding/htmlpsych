@@ -49,7 +49,10 @@ class CoolUtil
 
 	public static function difficultyString():String
 	{
-		return difficulties[PlayState.storyDifficulty].toUpperCase();
+		if (difficulties == null || difficulties.length == 0) difficulties = defaultDifficulties.copy();
+		var diff = (difficulties != null && PlayState.storyDifficulty < difficulties.length) ? difficulties[PlayState.storyDifficulty] : defaultDifficulty;
+		if (diff == null) diff = 'NORMAL';
+		return diff.toUpperCase();
 	}
 
 	inline public static function boundTo(value:Float, min:Float, max:Float):Float {

@@ -240,6 +240,14 @@ class FreeplayState extends MusicBeatState
 			}
 		}
 
+		if (vocals != null)
+		{
+			if (FlxG.sound.music == null || !FlxG.sound.music.playing || FlxG.sound.music.volume <= 0)
+			{
+				destroyFreeplayVocals();
+			}
+		}
+
 		if (!blockInput) {
 			FlxG.sound.muteKeys = TitleState.muteKeys;
 			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;

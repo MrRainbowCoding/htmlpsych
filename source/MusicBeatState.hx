@@ -12,6 +12,7 @@ class MusicBeatState extends FlxUIState
 {
 	private var curSection:Int = 0;
 	private var stepsToDo:Int = 0;
+	private var modded:Bool = false;
 
 	private var curStep:Int = 0;
 	private var curBeat:Int = 0;
@@ -20,8 +21,14 @@ class MusicBeatState extends FlxUIState
 	private var curDecBeat:Float = 0;
 	private var controls(get, never):Controls;
 
-	public var windowNamePrefix:String = "Psych Engine Extra";
+	public var windowNamePrefix:String = "HT Psych";
 	public var windowNameSuffix:String = "";
+	#if modded
+	// Change this to your mod name!
+		public var windowNameModded:String = "Playable Final Escape";
+	#else
+		public var windowNameModded:String = ""; 
+	#end
 
 	inline function get_controls():Controls
 		return PlayerSettings.player1.controls;
@@ -60,7 +67,7 @@ class MusicBeatState extends FlxUIState
 
 		if (FlxG.save.data != null) FlxG.save.data.fullscreen = FlxG.fullscreen;
 
-		Application.current.window.title = windowNamePrefix + windowNameSuffix;
+		Application.current.window.title = windowNamePrefix + (modded ? windowNameModded : "") + windowNameSuffix;
 		
 		super.update(elapsed);
 	}

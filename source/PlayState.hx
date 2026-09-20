@@ -1206,7 +1206,8 @@ class PlayState extends MusicBeatState
 
 		Conductor.safeZoneOffset = (ClientPrefs.safeFrames / 60) * 1000 * playbackRate;
 
-		windowNameSuffix = ' | ' + (isStoryMode ? 'Story Mode - ' : 'Freeplay - ') + WeekData.getCurrentWeek().weekName
+		var curWeekName:String = (WeekData.getCurrentWeek() != null ? WeekData.getCurrentWeek().weekName : '');
+		windowNameSuffix = ' | ' + (isStoryMode ? 'Story Mode - ' : 'Freeplay - ') + curWeekName
 			+ ' | $curSongDisplayName [${CoolUtil.difficultyString()}]';
 
 		cacheCountdown();
@@ -2398,12 +2399,12 @@ class PlayState extends MusicBeatState
 		FlxG.sound.music.time = time;
 		FlxG.sound.music.play();
 
-		if (time <= vocals.length)
+		if (vocals.length <= 0 || time <= vocals.length)
 		{
 			vocals.time = time;
 			vocals.play();
 		}
-		if (time <= vocalsDad.length)
+		if (vocalsDad.length <= 0 || time <= vocalsDad.length)
 		{
 			vocalsDad.time = time;
 			vocalsDad.play();
@@ -2435,9 +2436,11 @@ class PlayState extends MusicBeatState
 			FlxG.sound.music.time = startPos;
 		if (playbackRate == 1)
 			FlxG.sound.music.onComplete = onSongComplete;
+		vocals.volume = 1;
 		vocals.play();
 		if (inEditor)
 			vocals.time = startPos;
+		vocalsDad.volume = 1;
 		vocalsDad.play();
 		if (inEditor)
 			vocalsDad.time = startPos;
@@ -2980,8 +2983,16 @@ class PlayState extends MusicBeatState
 
 	function resyncVocals():Void
 	{
-		if (FlxG.sound.music == null || vocals == null || startingSong || endingSong || endingTimer != null)
+		if (FlxG.sound.music == null || vocals == null || startingSong || endingSong || endingTimer != null || paused || isDead)
 			return;
+
+		if (!FlxG.sound.music.playing || FlxG.sound.music.volume <= 0)
+		{
+			vocals.pause();
+			if (vocalsDad != null)
+				vocalsDad.pause();
+			return;
+		}
 
 		if (playbackRate < 1)
 			FlxG.sound.music.pause();
@@ -2998,12 +3009,12 @@ class PlayState extends MusicBeatState
 			FlxG.sound.music.time = Conductor.songPosition;
 			FlxG.sound.music.play();
 		}
-		if (Conductor.songPosition <= vocals.length)
+		if (vocals.length <= 0 || Conductor.songPosition <= vocals.length)
 		{
 			vocals.time = Conductor.songPosition;
 			vocals.play();
 		}
-		if (Conductor.songPosition <= vocalsDad.length)
+		if (vocalsDad.length <= 0 || Conductor.songPosition <= vocalsDad.length)
 		{
 			vocalsDad.time = Conductor.songPosition;
 			vocalsDad.play();
@@ -3057,6 +3068,31 @@ class PlayState extends MusicBeatState
 		{
 			if (FlxG.sound.music != null && FlxG.sound.music.playing)
 				setSongPitch();
+
+			if (vocals != null && FlxG.sound.music != null)
+			{
+				var instIsOn:Bool = FlxG.sound.music.playing && FlxG.sound.music.volume > 0 && !paused && !isDead && !startingSong && !endingSong;
+				if (!instIsOn)
+				{
+					if (vocals.playing)
+						vocals.pause();
+					if (vocalsDad != null && vocalsDad.playing)
+						vocalsDad.pause();
+				}
+				else if (SONG.needsVoices)
+				{
+					if (!vocals.playing && (vocals.length <= 0 || Conductor.songPosition < vocals.length))
+					{
+						vocals.play();
+						vocals.time = FlxG.sound.music.time;
+					}
+					if (foundDadVocals && vocalsDad != null && !vocalsDad.playing && (vocalsDad.length <= 0 || Conductor.songPosition < vocalsDad.length))
+					{
+						vocalsDad.play();
+						vocalsDad.time = FlxG.sound.music.time;
+					}
+				}
+			}
 
 			if (playbackRate != 1
 				&& generatedMusic
@@ -3257,12 +3293,21 @@ class PlayState extends MusicBeatState
 
 			if (!paused && !inEditor)
 			{
+				if (songLength <= 0 && FlxG.sound.music != null && FlxG.sound.music.length > 0)
+				{
+					songLength = FlxG.sound.music.length;
+					setOnScripts('songLength', songLength);
+				}
+
 				if (updateTime)
 				{
 					var curTime:Float = Conductor.songPosition - ClientPrefs.noteOffset;
 					if (curTime < 0)
 						curTime = 0;
-					songPercent = (curTime / songLength);
+					if (songLength > 0)
+						songPercent = (curTime / songLength);
+					else
+						songPercent = 0;
 
 					if (ClientPrefs.timeBarType == 'Percentage Passed')
 					{ // geometry dash moment
@@ -3270,7 +3315,7 @@ class PlayState extends MusicBeatState
 					}
 					else if (ClientPrefs.timeBarType != 'Song Name')
 					{
-						var songCalc:Float = (songLength - curTime) / playbackRate;
+						var songCalc:Float = (songLength > 0 ? (songLength - curTime) : 0) / playbackRate;
 						if (ClientPrefs.timeBarType == 'Time Elapsed')
 							songCalc = curTime / playbackRate;
 
@@ -5537,11 +5582,12 @@ class PlayState extends MusicBeatState
 	override function stepHit()
 	{
 		super.stepHit();
+		var resyncLimit:Float = #if (web || html5) 100.0 #else 20.0 #end * playbackRate;
 		if (generatedMusic
-			&& (Math.abs(FlxG.sound.music.time - Conductor.songPosition) > 20 * playbackRate
+			&& (Math.abs(FlxG.sound.music.time - Conductor.songPosition) > resyncLimit
 				|| (SONG.needsVoices
-					&& ((Math.abs(vocals.time - Conductor.songPosition) > 20 * playbackRate)
-						|| (foundDadVocals && Math.abs(vocalsDad.time - Conductor.songPosition) > 20 * playbackRate)))))
+					&& ((Math.abs(vocals.time - Conductor.songPosition) > resyncLimit)
+						|| (foundDadVocals && Math.abs(vocalsDad.time - Conductor.songPosition) > resyncLimit)))))
 		{
 			resyncVocals();
 		}
