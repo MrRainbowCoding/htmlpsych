@@ -952,6 +952,39 @@ class PvPPlayState extends MusicBeatState {
 				FlxG.sound.music.pause();
 				vocals.pause();
 				vocalsDad.pause();
+				if (vocals != null)
+				{
+					vocals.pause();
+					vocals.volume = 0;
+				}
+				if (vocalsDad != null)
+				{
+					vocalsDad.pause();
+					vocalsDad.volume = 0;
+				}
+				#if (js && html5)
+				js.Syntax.code("
+					var stopHowl = function(snd) {
+						if (snd && snd._sound && snd._sound.__buffer && snd._sound.__buffer.__srcHowl) {
+							var h = snd._sound.__buffer.__srcHowl;
+							try { h.pause(); } catch(e) {}
+							try { h.stop(); } catch(e) {}
+							if (h._sounds) {
+								for (var i = 0; i < h._sounds.length; i++) {
+									var s = h._sounds[i];
+									if (s && s._node) {
+										try { s._node.pause(); } catch(e) {}
+										try { s._node.volume = 0; } catch(e) {}
+									}
+								}
+							}
+						}
+					};
+					stopHowl({0});
+					stopHowl({1});
+					stopHowl({2});
+				", vocals, vocalsDad, FlxG.sound.music);
+				#end
 			}
 
 			if (startTimer != null && !startTimer.finished)
@@ -986,6 +1019,27 @@ class PvPPlayState extends MusicBeatState {
 			{
 				resyncVocals();
 			}
+			if (vocals != null) vocals.volume = 1;
+			if (vocalsDad != null) vocalsDad.volume = 1;
+			#if (js && html5)
+			js.Syntax.code("
+				var restoreHowl = function(snd) {
+					if (snd && snd._sound && snd._sound.__buffer && snd._sound.__buffer.__srcHowl) {
+						var h = snd._sound.__buffer.__srcHowl;
+						if (h._sounds) {
+							for (var i = 0; i < h._sounds.length; i++) {
+								var s = h._sounds[i];
+								if (s && s._node) {
+									try { s._node.volume = 1; } catch(e) {}
+								}
+							}
+						}
+					}
+				};
+				restoreHowl({0});
+				restoreHowl({1});
+			", vocals, vocalsDad);
+			#end
 
 			if (startTimer != null && !startTimer.finished)
 				startTimer.active = true;
@@ -1459,6 +1513,39 @@ class PvPPlayState extends MusicBeatState {
 			FlxG.sound.music.pause();
 			vocals.pause();
 			vocalsDad.pause();
+			if (vocals != null)
+			{
+				vocals.pause();
+				vocals.volume = 0;
+			}
+			if (vocalsDad != null)
+			{
+				vocalsDad.pause();
+				vocalsDad.volume = 0;
+			}
+			#if (js && html5)
+			js.Syntax.code("
+				var stopHowl = function(snd) {
+					if (snd && snd._sound && snd._sound.__buffer && snd._sound.__buffer.__srcHowl) {
+						var h = snd._sound.__buffer.__srcHowl;
+						try { h.pause(); } catch(e) {}
+						try { h.stop(); } catch(e) {}
+						if (h._sounds) {
+							for (var i = 0; i < h._sounds.length; i++) {
+								var s = h._sounds[i];
+								if (s && s._node) {
+									try { s._node.pause(); } catch(e) {}
+									try { s._node.volume = 0; } catch(e) {}
+								}
+							}
+						}
+					}
+				};
+				stopHowl({0});
+				stopHowl({1});
+				stopHowl({2});
+			", vocals, vocalsDad, FlxG.sound.music);
+			#end
 			@:privateAccess { //This is so hiding the debugger doesn't play the music again
 				FlxG.sound.music._alreadyPaused = true;
 				vocals._alreadyPaused = true;

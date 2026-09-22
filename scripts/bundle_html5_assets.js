@@ -602,6 +602,61 @@ if (typeof flixel_sound_FlxSound !== 'undefined' && flixel_sound_FlxSound.protot
   flixel_sound_FlxSound.prototype.get_length = function() {
     return this._length;
   };
+  var origFlxSoundPause = flixel_sound_FlxSound.prototype.pause;
+  flixel_sound_FlxSound.prototype.pause = function() {
+    this.volume = 0;
+    if (this._sound && this._sound.__buffer && this._sound.__buffer.__srcHowl) {
+      var h = this._sound.__buffer.__srcHowl;
+      try { h.pause(); } catch(e) {}
+      try { h.stop(); } catch(e) {}
+      if (h._sounds) {
+        for (var i = 0; i < h._sounds.length; i++) {
+          var s = h._sounds[i];
+          if (s && s._node) {
+            try { s._node.pause(); } catch(e) {}
+            try { s._node.volume = 0; } catch(e) {}
+          }
+        }
+      }
+    }
+    return origFlxSoundPause.call(this);
+  };
+  var origFlxSoundPlay = flixel_sound_FlxSound.prototype.play;
+  flixel_sound_FlxSound.prototype.play = function(ForceRestart, StartTime, EndTime) {
+    if (this._sound && this._sound.__buffer && this._sound.__buffer.__srcHowl) {
+      var h = this._sound.__buffer.__srcHowl;
+      var targetVol = (this.volume > 0) ? this.volume : 1;
+      if (h._sounds) {
+        for (var i = 0; i < h._sounds.length; i++) {
+          var s = h._sounds[i];
+          if (s && s._node) {
+            try { s._node.volume = targetVol; } catch(e) {}
+          }
+        }
+      }
+    }
+    if (this.volume === 0 && !this._paused) {
+      this.volume = 1;
+    }
+    return origFlxSoundPlay.call(this, ForceRestart, StartTime, EndTime);
+  };
+  var origFlxSoundSetVolume = flixel_sound_FlxSound.prototype.set_volume;
+  flixel_sound_FlxSound.prototype.set_volume = function(Volume) {
+    var res = origFlxSoundSetVolume.call(this, Volume);
+    if (this._sound && this._sound.__buffer && this._sound.__buffer.__srcHowl) {
+      var h = this._sound.__buffer.__srcHowl;
+      try { h.volume(Volume); } catch(e) {}
+      if (h._sounds) {
+        for (var i = 0; i < h._sounds.length; i++) {
+          var s = h._sounds[i];
+          if (s && s._node) {
+            try { s._node.volume = Volume; } catch(e) {}
+          }
+        }
+      }
+    }
+    return res;
+  };
 }
 `;
   if (!js.includes('__dynamicLengthPatched') && js.includes(hookMarker)) {
