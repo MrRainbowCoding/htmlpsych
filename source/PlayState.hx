@@ -2833,8 +2833,6 @@ class PlayState extends MusicBeatState
 			if (FlxG.sound.music != null)
 			{
 				FlxG.sound.music.pause();
-				vocals.pause();
-				vocalsDad.pause();
 				if (vocals != null)
 				{
 					vocals.pause();
@@ -3701,8 +3699,6 @@ class PlayState extends MusicBeatState
 		if (FlxG.sound.music != null)
 		{
 			FlxG.sound.music.pause();
-			vocals.pause();
-			vocalsDad.pause();
 			if (vocals != null)
 			{
 				vocals.pause();

@@ -3314,7 +3314,6 @@ class FunkinLua
 
 	public static function getObjectDirectly(objectName:String, ?checkForTextsToo:Bool = true):Dynamic
 	{
-		var coverMeInPiss:Dynamic = PlayState.instance.getLuaObject(objectName, checkForTextsToo);
 		var coverMeInPiss:Dynamic = PlayState.instance != null ? PlayState.instance.getLuaObject(objectName, checkForTextsToo) : null;
 		if (coverMeInPiss == null)
 		{
@@ -3436,43 +3435,24 @@ import js.Lib;
 @:expose
 class FunkinLua 
 {
-    public static var Function_Stop:Int = 1;
-    public static var Function_Continue:Int = 0;
-    public static var Function_StopLua:Int = 2;
 	public static var Function_Stop:Int = 1;
 	public static var Function_Continue:Int = 0;
 	public static var Function_StopLua:Int = 2;
 
-    public var scriptName:String = "";
-    public var luaState:Dynamic = null;
 	public var scriptName:String = "";
 	public var luaState:Dynamic = null;
 	public var closed:Bool = false;
 
-    public function new(scriptPath:String) 
-    {
-        this.scriptName = scriptPath;
 	public function new(scriptPath:String) 
 	{
 		this.scriptName = scriptPath;
 
-        var globalWindow:Dynamic = js.Syntax.code("window");
-        if (globalWindow.fengari == null) {
-            trace("CRITICAL LUA ENGINE ERROR: fengari-web.js script bundle is missing from the template head!");
-            return;
-        }
 		var globalWindow:Dynamic = js.Syntax.code("window");
 		if (globalWindow.fengari == null) {
 			trace("CRITICAL LUA ENGINE ERROR: fengari-web.js script bundle is missing from the template head!");
 			return;
 		}
 
-        try {
-            // 1. Fire up a pure browser-based Lua VM state
-            luaState = globalWindow.fengari.lauxlib.luaL_newstate();
-            globalWindow.fengari.lualib.luaL_openlibs(luaState);
-            globalWindow.fengari.lauxlib.luaL_requiref(luaState, globalWindow.fengari.to_luastring("js"), globalWindow.fengari.interop.luaopen_js, 1);
-            globalWindow.fengari.lua.lua_pop(luaState, 1);
 		try {
 			// 1. Fire up a pure browser-based Lua VM state
 			luaState = globalWindow.fengari.lauxlib.luaL_newstate();
@@ -3480,7 +3460,6 @@ class FunkinLua
 			globalWindow.fengari.lauxlib.luaL_requiref(luaState, globalWindow.fengari.to_luastring("js"), globalWindow.fengari.interop.luaopen_js, 1);
 			globalWindow.fengari.lua.lua_pop(luaState, 1);
 
-            if (!openfl.utils.Assets.exists(scriptPath)) return;
 			var luaCode:String = null;
 			if (openfl.utils.Assets.exists(scriptPath)) {
 				luaCode = openfl.utils.Assets.getText(scriptPath);
@@ -3488,25 +3467,14 @@ class FunkinLua
 				luaCode = Paths.getTextFromFile(scriptPath);
 			}
 
-            var luaCode:String = openfl.utils.Assets.getText(scriptPath);
-            if (luaCode == null || StringTools.trim(luaCode).length == 0) return;
 			if (luaCode == null || StringTools.trim(luaCode).length == 0) return;
 
-            // Strip Windows carriage text endings (\r\n) which cause web parsing syntax panic
-            luaCode = StringTools.replace(luaCode, "\r\n", "\n");
 			// Strip Windows carriage text endings (\r\n) which cause web parsing syntax panic
 			luaCode = StringTools.replace(luaCode, "\r\n", "\n");
 
-            // 2. INITIALIZE THE AUTOMATED API BRIDGE
-            // This maps standard Psych functions so users don't have to change anything!
-            buildNativeWebLuaBridges();
 			// 2. INITIALIZE THE AUTOMATED API BRIDGE
 			buildNativeWebLuaBridges();
 
-            // Set up Psych default return parameters
-            set('Function_StopLua', Function_StopLua);
-            set('Function_Stop', Function_Stop);
-            set('Function_Continue', Function_Continue);
 			// Set up Psych default return parameters
 			set('Function_StopLua', Function_StopLua);
 			set('Function_Stop', Function_Stop);
@@ -3514,13 +3482,6 @@ class FunkinLua
 			set('luaDebugMode', false);
 			set('luaDeprecatedWarnings', true);
 
-            // Populate core global states standard to basic mod charts
-            if (PlayState.instance != null && PlayState.SONG != null) {
-                set('scrollSpeed', PlayState.SONG.speed);
-                set('songName', PlayState.SONG.song);
-                set('screenWidth', openfl.Lib.current.stage.stageWidth);
-                set('screenHeight', openfl.Lib.current.stage.stageHeight);
-            }
 			// Populate core global states standard to basic mod charts
 			if (PlayState.instance != null && PlayState.SONG != null) {
 				set('curBpm', Conductor.bpm);
@@ -3536,66 +3497,17 @@ class FunkinLua
 				set('startedCountdown', false);
 				set('inChartEditor', PlayState.instance.inEditor);
 
-            // 3. Compile and mount the user's original Lua code text structure
-            var luaBytes = globalWindow.fengari.to_luastring(luaCode);
-            var result:Int = globalWindow.fengari.lauxlib.luaL_dostring(luaState, luaBytes);
-            if (result != 0) {
-                var errObj = globalWindow.fengari.lua.lua_tostring(luaState, -1);
-                var errorMsg:String = "Unknown Lua Error";
-                if (errObj != null) {
-                    try {
-                        errorMsg = globalWindow.fengari.to_jsstring(errObj);
-                    } catch(e:Dynamic) {
-                        errorMsg = Std.string(errObj);
-                    }
-                }
-                trace("Lua Compiler Panic in file (" + scriptPath + "): " + errorMsg);
-                globalWindow.fengari.lua.lua_pop(luaState, 1);
-            } else {
-                trace("SUCCESS: Raw unmodified Lua script mounted unblocked: " + scriptPath);
-                call('onCreate', []);
-            }
 				set('isStoryMode', PlayState.isStoryMode);
 				set('difficulty', PlayState.storyDifficulty);
 				set('difficultyName', CoolUtil.difficulties[PlayState.storyDifficulty]);
 				set('weekRaw', PlayState.storyWeek);
 				set('seenCutscene', PlayState.seenCutscene);
 
-        } catch(e:js.lib.Error) {
-            trace("Fatal pipeline failure handling script: " + scriptPath + " | Msg: " + e.message);
-        }
-    }
 				set('cameraX', 0);
 				set('cameraY', 0);
 				set('screenWidth', FlxG.width);
 				set('screenHeight', FlxG.height);
 
-    private function buildNativeWebLuaBridges() 
-    {
-        var feng:Dynamic = js.Syntax.code("window.fengari");
-        var safeToJs = function(u8:Dynamic):String {
-            if (u8 == null) return "";
-            try {
-                return feng.to_jsstring(u8);
-            } catch(e:Dynamic) {
-                return Std.string(u8);
-            }
-        };
-        
-        // --- 1. BRIDGE FOR getProperty('variable') ---
-        var lua_getProperty = function(L:Dynamic):Int {
-            var targetVar:String = safeToJs(feng.lua.lua_tostring(L, 1));
-            var output:Dynamic = null;
-            if (PlayState.instance != null) {
-                try {
-                    var splitPath = targetVar.split('.');
-                    if (splitPath.length > 1) output = getVarInArray(getPropertyLoopThingWhatever(splitPath), splitPath[splitPath.length - 1]);
-                    else output = getVarInArray(getInstance(), targetVar);
-                } catch(e:Dynamic) {}
-            }
-            feng.interop.push(L, output); // Push response array back to Lua state machine
-            return 1; // 1 return value
-        };
 				set('curBeat', 0);
 				set('curStep', 0);
 				set('score', 0);
@@ -3607,19 +3519,6 @@ class FunkinLua
 				set('version', MainMenuState.psychEngineVersion.trim());
 				set('versionExtra', MainMenuState.psychEngineExtraVersion.trim());
 
-        // --- 2. BRIDGE FOR setProperty('variable', value) ---
-        var lua_setProperty = function(L:Dynamic):Int {
-            var targetVar:String = safeToJs(feng.lua.lua_tostring(L, 1));
-            var incomingVal:Dynamic = feng.interop.tojs(L, 2); // Core Interop parses types perfectly!
-            if (PlayState.instance != null) {
-                try {
-                    var splitPath = targetVar.split('.');
-                    if (splitPath.length > 1) setVarInArray(getPropertyLoopThingWhatever(splitPath), splitPath[splitPath.length - 1], incomingVal);
-                    else setVarInArray(getInstance(), targetVar, incomingVal);
-                } catch(e:Dynamic) {}
-            }
-            return 0; // 0 return values
-        };
 				set('inGameOver', false);
 				set('healthGainMult', PlayState.instance.healthGain);
 				set('healthLossMult', PlayState.instance.healthLoss);
@@ -3629,18 +3528,6 @@ class FunkinLua
 				set('opponentPlay', PlayState.instance.opponentChart);
 				set('playbackRate', PlayState.instance.playbackRate);
 
-        // --- 3. BRIDGE FOR getPropertyFromClass('class', 'var') ---
-        var lua_getPropertyFromClass = function(L:Dynamic):Int {
-            var className:String = safeToJs(feng.lua.lua_tostring(L, 1));
-            var targetVar:String = safeToJs(feng.lua.lua_tostring(L, 2));
-            var output:Dynamic = null;
-            try {
-                var clazz = Type.resolveClass(className);
-                if (clazz != null) output = Reflect.getProperty(clazz, targetVar);
-            } catch(e:Dynamic) {}
-            feng.interop.push(L, output);
-            return 1;
-        };
 				set('defaultBoyfriendX', PlayState.instance.BF_X);
 				set('defaultBoyfriendY', PlayState.instance.BF_Y);
 				set('defaultOpponentX', PlayState.instance.DAD_X);
@@ -3648,45 +3535,10 @@ class FunkinLua
 				set('defaultGirlfriendX', PlayState.instance.GF_X);
 				set('defaultGirlfriendY', PlayState.instance.GF_Y);
 
-        // --- 4. BRIDGE FOR setPropertyFromClass('class', 'var', value) ---
-        var lua_setPropertyFromClass = function(L:Dynamic):Int {
-            var className:String = safeToJs(feng.lua.lua_tostring(L, 1));
-            var targetVar:String = safeToJs(feng.lua.lua_tostring(L, 2));
-            var incomingVal:Dynamic = feng.interop.tojs(L, 3);
-            try {
-                var clazz = Type.resolveClass(className);
-                if (clazz != null) Reflect.setProperty(clazz, targetVar, incomingVal);
-            } catch(e:Dynamic) {}
-            return 0;
-        };
 				set('boyfriendName', PlayState.SONG.player1);
 				set('dadName', PlayState.SONG.player2);
 				set('gfName', PlayState.SONG.gfVersion);
 
-        // --- 5. KEY INPUT BRIDGES ---
-        var lua_keyJustPressed = function(L:Dynamic):Int {
-            var name:String = safeToJs(feng.lua.lua_tostring(L, 1));
-            var pressed:Bool = false;
-            if (PlayState.instance != null) {
-                switch (name.toLowerCase()) {
-                    case 'left': pressed = PlayState.instance.controlJustPressed('note4_0');
-                    case 'down': pressed = PlayState.instance.controlJustPressed('note4_1');
-                    case 'up': pressed = PlayState.instance.controlJustPressed('note4_2');
-                    case 'right': pressed = PlayState.instance.controlJustPressed('note4_3');
-                    case 'accept': pressed = PlayState.instance.controlJustPressed('accept');
-                    case 'back': pressed = PlayState.instance.controlJustPressed('back');
-                    case 'pause': pressed = PlayState.instance.controlJustPressed('pause');
-                    case 'reset': pressed = PlayState.instance.controlJustPressed('reset');
-                    case 'space': pressed = FlxG.keys.justPressed.SPACE;
-                    default:
-                        try {
-                            pressed = Reflect.field(FlxG.keys.justPressed, name.toUpperCase()) == true;
-                        } catch(e:Dynamic) {}
-                }
-            }
-            feng.lua.lua_pushboolean(L, pressed ? 1 : 0);
-            return 1;
-        };
 				set('downscroll', ClientPrefs.downScroll);
 				set('middlescroll', ClientPrefs.middleScroll);
 				set('framerate', ClientPrefs.framerate);
@@ -3706,48 +3558,10 @@ class FunkinLua
 				set('noteSkin', ClientPrefs.noteSkin);
 				set('uiSkin', ClientPrefs.uiSkin);
 
-        var lua_keyPressed = function(L:Dynamic):Int {
-            var name:String = safeToJs(feng.lua.lua_tostring(L, 1));
-            var pressed:Bool = false;
-            if (PlayState.instance != null) {
-                switch (name.toLowerCase()) {
-                    case 'left': pressed = PlayState.instance.controlPressed('note4_0');
-                    case 'down': pressed = PlayState.instance.controlPressed('note4_1');
-                    case 'up': pressed = PlayState.instance.controlPressed('note4_2');
-                    case 'right': pressed = PlayState.instance.controlPressed('note4_3');
-                    case 'space': pressed = FlxG.keys.pressed.SPACE;
-                    default:
-                        try {
-                            pressed = Reflect.field(FlxG.keys.pressed, name.toUpperCase()) == true;
-                        } catch(e:Dynamic) {}
-                }
-            }
-            feng.lua.lua_pushboolean(L, pressed ? 1 : 0);
-            return 1;
-        };
 				set('scriptName', scriptName);
 				set('buildTarget', 'browser');
 			}
 
-        var lua_keyReleased = function(L:Dynamic):Int {
-            var name:String = safeToJs(feng.lua.lua_tostring(L, 1));
-            var released:Bool = false;
-            if (PlayState.instance != null) {
-                switch (name.toLowerCase()) {
-                    case 'left': released = PlayState.instance.controlReleased('note4_0');
-                    case 'down': released = PlayState.instance.controlReleased('note4_1');
-                    case 'up': released = PlayState.instance.controlReleased('note4_2');
-                    case 'right': released = PlayState.instance.controlReleased('note4_3');
-                    case 'space': released = FlxG.keys.justReleased.SPACE;
-                    default:
-                        try {
-                            released = Reflect.field(FlxG.keys.justReleased, name.toUpperCase()) == true;
-                        } catch(e:Dynamic) {}
-                }
-            }
-            feng.lua.lua_pushboolean(L, released ? 1 : 0);
-            return 1;
-        };
 			// 3. Compile and mount the user's original Lua code text structure
 			var luaBytes = globalWindow.fengari.to_luastring(luaCode);
 			var result:Int = globalWindow.fengari.lauxlib.luaL_dostring(luaState, luaBytes);
@@ -3768,15 +3582,11 @@ class FunkinLua
 				call('onCreate', []);
 			}
 
-        feng.interop.push(luaState, lua_getProperty);
-        feng.lua.lua_setglobal(luaState, "getProperty");
 		} catch(e:js.lib.Error) {
 			trace("Fatal pipeline failure handling script: " + scriptPath + " | Msg: " + e.message);
 		}
 	}
 
-        feng.interop.push(luaState, lua_setProperty);
-        feng.lua.lua_setglobal(luaState, "setProperty");
 	public function addCallback(name:String, func:Dynamic)
 	{
 		var feng:Dynamic = js.Syntax.code("window.fengari");
@@ -3812,14 +3622,10 @@ class FunkinLua
 		feng.lua.lua_setglobal(luaState, name);
 	}
 
-        feng.interop.push(luaState, lua_getPropertyFromClass);
-        feng.lua.lua_setglobal(luaState, "getPropertyFromClass");
 	private function buildNativeWebLuaBridges() 
 	{
 		var feng:Dynamic = js.Syntax.code("window.fengari");
 
-        feng.interop.push(luaState, lua_setPropertyFromClass);
-        feng.lua.lua_setglobal(luaState, "setPropertyFromClass");
 		// Property get/set
 		addCallback("getProperty", function(variable:String)
 		{
@@ -3860,12 +3666,8 @@ class FunkinLua
 			if (shitMyPants.length > 1)
 				realObject = getPropertyLoopThingWhatever(shitMyPants, true, false);
 
-        feng.interop.push(luaState, lua_keyJustPressed);
-        feng.lua.lua_setglobal(luaState, "keyJustPressed");
 			if (realObject == null) return null;
 
-        feng.interop.push(luaState, lua_keyPressed);
-        feng.lua.lua_setglobal(luaState, "keyPressed");
 			if (Std.isOfType(realObject, FlxTypedGroup))
 			{
 				var grp = cast(realObject, FlxTypedGroup<Dynamic>);
@@ -3874,8 +3676,6 @@ class FunkinLua
 				return null;
 			}
 
-        feng.interop.push(luaState, lua_keyReleased);
-        feng.lua.lua_setglobal(luaState, "keyReleased");
 			var leArray:Dynamic = realObject[index];
 			if (leArray != null)
 			{
@@ -3896,14 +3696,8 @@ class FunkinLua
 			if (shitMyPants.length > 1)
 				realObject = getPropertyLoopThingWhatever(shitMyPants, true, false);
 
-        var fallbackLua:String = "local mt = getmetatable(_G) or {}; local old_index = mt.__index; mt.__index = function(t, k) if old_index then local v = (type(old_index) == 'function') and old_index(t, k) or old_index[k]; if v ~= nil then return v end end; return function(...) return false end end; setmetatable(_G, mt)";
-        feng.lauxlib.luaL_dostring(luaState, feng.to_luastring(fallbackLua));
-    }
 			if (realObject == null) return;
 
-    public function call(event:String, args:Array<Dynamic>):Dynamic 
-    {
-        if (luaState == null) return Function_Continue;
 			if (Std.isOfType(realObject, FlxTypedGroup))
 			{
 				var grp = cast(realObject, FlxTypedGroup<Dynamic>);
@@ -3912,14 +3706,6 @@ class FunkinLua
 				return;
 			}
 
-        var feng:Dynamic = js.Syntax.code("window.fengari");
-        feng.lua.lua_getglobal(luaState, event);
-        
-        // Safety: verify the script contains an implementation hook for this call loop
-        if (!feng.lua.lua_isfunction(luaState, -1)) {
-            feng.lua.lua_pop(luaState, 1);
-            return Function_Continue;
-        }
 			var leArray:Dynamic = realObject[index];
 			if (leArray != null)
 			{
@@ -3985,12 +3771,6 @@ class FunkinLua
 			return true;
 		});
 
-        // Direct cross-language variable pushing using Fengari's Interop arrays
-        for (arg in args) {
-            try {
-                feng.interop.push(luaState, arg);
-            } catch(e:Dynamic) {}
-        }
 		// Object Ordering & Layers
 		addCallback("getObjectOrder", function(obj:String)
 		{
@@ -4001,27 +3781,6 @@ class FunkinLua
 				leObj = getVarInArray(getPropertyLoopThingWhatever(killMe), killMe[killMe.length - 1]);
 			}
 
-        var status:Int = feng.lua.lua_pcall(luaState, args.length, 1, 0); 
-        if (status == 0) {
-            var ret:Dynamic = feng.interop.tojs(luaState, -1);
-            feng.lua.lua_pop(luaState, 1);
-            if (ret != null) return ret;
-        } else {
-            var errObj = feng.lua.lua_tostring(luaState, -1);
-            var errorMsg:String = "Unknown Lua Error";
-            if (errObj != null) {
-                try {
-                    errorMsg = feng.to_jsstring(errObj);
-                } catch(e:Dynamic) {
-                    errorMsg = Std.string(errObj);
-                }
-            }
-            trace("Lua Runtime Crash inside hook [" + event + "]: " + errorMsg);
-            feng.lua.lua_pop(luaState, 1);
-        }
-        
-        return Function_Continue;
-    }
 			if (leObj != null)
 			{
 				return getInstance().members.indexOf(leObj);
@@ -4037,15 +3796,6 @@ class FunkinLua
 				leObj = getVarInArray(getPropertyLoopThingWhatever(killMe), killMe[killMe.length - 1]);
 			}
 
-    public function set(variable:String, value:Dynamic) 
-    {
-        if (luaState == null) return;
-        var feng:Dynamic = js.Syntax.code("window.fengari");
-        try {
-            feng.interop.push(luaState, value);
-            feng.lua.lua_setglobal(luaState, variable);
-        } catch(e:Dynamic) {}
-    }
 			if (leObj != null)
 			{
 				getInstance().remove(leObj, true);
@@ -4053,21 +3803,6 @@ class FunkinLua
 			}
 		});
 
-    // Retain desktop hooks to allow reflection scanning to cross-compile cleanly
-    public static function setVarInArray(instance:Dynamic, variable:String, value:Dynamic):Any {
-        var shit:Array<String> = variable.split('[');
-        if (shit.length > 1) {
-            var blah:Dynamic = Reflect.getProperty(instance, shit[0]);
-            for (i in 1...shit.length) {
-                var leNum:Dynamic = shit[i].substr(0, shit[i].length - 1);
-                if (i >= shit.length - 1) blah[leNum] = value;
-                else blah = blah[leNum];
-            }
-            return blah;
-        }
-        Reflect.setProperty(instance, variable, value);
-        return true;
-    }
 		// Sprites
 		addCallback("makeLuaSprite", function(tag:String, image:String, x:Float, y:Float)
 		{
@@ -4102,10 +3837,6 @@ class FunkinLua
 			if (!color.startsWith('0x'))
 				colorNum = Std.parseInt('0xff$color');
 
-    public static inline function getInstance():Dynamic
-    {
-        return (PlayState.instance != null && PlayState.instance.isDead && GameOverSubstate.instance != null) ? GameOverSubstate.instance : PlayState.instance;
-    }
 			var spr:FlxSprite = PlayState.instance.getLuaObject(obj, false);
 			if (spr != null)
 			{
@@ -4113,11 +3844,6 @@ class FunkinLua
 				return;
 			}
 
-    public static function getObjectDirectly(objectName:String, ?checkForTextsToo:Bool = true):Dynamic
-    {
-        var coverMeInPiss:Dynamic = PlayState.instance != null ? PlayState.instance.getLuaObject(objectName, checkForTextsToo) : null;
-        if (coverMeInPiss == null)
-            coverMeInPiss = getVarInArray(getInstance(), objectName);
 			var object:FlxSprite = Reflect.getProperty(getInstance(), obj);
 			if (object != null)
 			{
@@ -4132,28 +3858,11 @@ class FunkinLua
 			var gY = gridY == null ? 0 : gridY;
 			var animated = gX != 0 || gY != 0;
 
-        return coverMeInPiss;
-    }
 			if (killMe.length > 1)
 			{
 				spr = getVarInArray(getPropertyLoopThingWhatever(killMe), killMe[killMe.length - 1]);
 			}
 
-    public static function getVarInArray(instance:Dynamic, variable:String):Any
-    {
-        var shit:Array<String> = variable.split('[');
-        if (shit.length > 1)
-        {
-            var blah:Dynamic = Reflect.getProperty(instance, shit[0]);
-            for (i in 1...shit.length)
-            {
-                var leNum:Dynamic = shit[i].substr(0, shit[i].length - 1);
-                blah = blah[leNum];
-            }
-            return blah;
-        }
-        return Reflect.getProperty(instance, variable);
-    }
 			if (spr != null && image != null && image.length > 0)
 			{
 				spr.loadGraphic(Paths.image(image), animated, gX, gY);
@@ -4168,12 +3877,6 @@ class FunkinLua
 				spr = getVarInArray(getPropertyLoopThingWhatever(killMe), killMe[killMe.length - 1]);
 			}
 
-    public static function getPropertyLoopThingWhatever(killMe:Array<String>, ?checkForTextsToo:Bool = true, ?getProperty:Bool = true):Dynamic
-    {
-        var coverMeInPiss:Dynamic = getObjectDirectly(killMe[0], checkForTextsToo);
-        var end = killMe.length;
-        if (getProperty)
-            end = killMe.length - 1;
 			if (spr != null && image != null && image.length > 0)
 			{
 				loadFrames(spr, image, spriteType);
@@ -4221,12 +3924,6 @@ class FunkinLua
 				return;
 			}
 
-        for (i in 1...end)
-        {
-            coverMeInPiss = getVarInArray(coverMeInPiss, killMe[i]);
-        }
-        return coverMeInPiss;
-    }
 			var pee:ModchartSprite = PlayState.instance.modchartSprites.get(tag);
 			if (destroy) pee.kill();
 			if (pee.wasAdded)
@@ -4245,9 +3942,6 @@ class FunkinLua
 			return PlayState.instance.modchartSprites.exists(tag);
 		});
 
-    public static var haxeInterp:Dynamic = null;
-    public function close() { luaState = null; }
-    public function stop() { luaState = null; }
 		// Transformations & Sizing
 		addCallback("setScrollFactor", function(obj:String, scrollX:Float, scrollY:Float)
 		{
