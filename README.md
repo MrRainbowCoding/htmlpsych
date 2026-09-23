@@ -52,47 +52,71 @@ _____________________________________
 * Difficulty dropdown in charting menu (from @CerBor)
 _____________________________________
 
-## Build Instructions:
-### Installing the Required Programs
-First, you need to install the **latest** Haxe and HaxeFlixel. I'm too lazy to write and keep updated with that setup (which is pretty simple). 
-1. [Install Haxe](https://haxe.org/download/)
-2. [Install HaxeFlixel](https://haxeflixel.com/documentation/install-haxeflixel/) after downloading Haxe (make sure to do `haxelib run lime setup flixel` to install the necessary libraries, basically just follow the whole guide)
+## Build and Setup Instructions
 
-You should make sure to keep Haxe & Flixel updated. If there is a compilation error, it might be due to having an outdated version.
+### Automated Setup (Recommended on Windows)
+Simply run the setup script:
+```bat
+setup\installLibs.bat
+```
+This automatically installs Git, Haxe, Node.js (via WinGet), sets up HaxeFlixel 5.6.1, Lime, OpenFL, and installs all required libraries (`flixel-addons`, `flixel-ui`, `flixel-tools`, `hscript`, `hscript-ex`, `discord_rpc`, `linc_luajit`, `hxCodec`).
 
-You'll also need to install a couple things that involve Gits. To do this, you need to do a few things first.
-1. Download [git-scm](https://git-scm.com/downloads). Works for Windows, Mac, and Linux, just select your build.
-2. Follow instructions to install the application properly.
-3. Run `haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc` to install Discord RPC.
-4. Run `haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit` to install LuaJIT. If you get an error about StatePointer when using Lua, run `haxelib remove linc_luajit` into Command Prompt/PowerShell, then re-install linc_luajit. (If you don't want your mod to be able to run .lua scripts, delete the "LUA_ALLOWED" line on Project.xml)
-5. Run `haxelib git hscript https://github.com/HaxeFoundation/hscript` to install hscript. After that, run `haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex` to install hscript-ex. (If you don't want your mod to be able to run .hscript scripts, delete the "HSCRIPT_ALLOWED" line on Project.xml)
-6. Run `haxelib install hxCodec` to install hxCodec for video support. (If you don't want your mod to have video support, delete the "VIDEOS_ALLOWED" line on Project.xml)
+---
 
-You should have everything ready for compiling the game! Follow the guide below to continue!
+### Manual Setup
+If you prefer manual setup:
+1. [Install Haxe](https://haxe.org/download/) (Haxe 4.2+ recommended).
+2. Install [Git](https://git-scm.com/downloads).
+3. Install [Node.js](https://nodejs.org/) (needed for bundling offline HTML5 assets & Lua scripts).
+4. Run the following commands in your terminal:
+   ```bash
+   haxelib install lime
+   haxelib install openfl
+   haxelib install flixel 5.6.1
+   haxelib run lime setup flixel
+   haxelib run lime setup
+   haxelib install flixel-tools
+   haxelib run flixel-tools setup
+   haxelib install flixel-addons
+   haxelib install flixel-ui
+   haxelib install hscript
+   haxelib install hxCodec
+   haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
+   haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+   haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
+   ```
 
-### Compiling game
-NOTE: If you see any messages relating to deprecated packages, ignore them. They're just warnings that don't affect compiling
+---
 
-#### HTML5
-Compiling to browser is very simple. You just need to run `lime test html5 -debug` (remove "-debug" for official releases) in the root of the project to build and run the HTML5 version. (command prompt navigation guide can be found [here](https://ninjamuffin99.newgrounds.com/news/post/1090480))
+### Compiling and Playing
 
-Do note that modpacks and Lua scripts are unavailable in HTML5.
+#### HTML5 (Web & Offline Standalone)
+Compiling to HTML5 supports full Lua scripting, modpacks, and offline local file execution:
+1. **Compile HTML5 build:**
+   ```bash
+   lime build html5
+   ```
+   *(For debug mode: `lime build html5 -debug`)*
 
-#### Desktop
-To run it from your desktop (Windows, Mac, Linux) it can be a bit more involved.
+2. **Bundle Assets and Offline Lua Engine:**
+   ```bash
+   node scripts/bundle_html5_assets.js
+   ```
+   This bundles all game and mod assets (audio, JSON charts, character configs, sprites, and Lua scripts) into an offline-compatible package powered by Fengari Web Lua.
 
-(NOTE: Mac and Linux have not been tested yet and they are not guaranteed to function)
+3. **Play:**
+   - Double-click `Play-HTML5.bat` in the project root, or
+   - Directly open `export/release/html5/bin/index.html` in any modern web browser.
 
-For Windows, you need to install [Visual Studio Community](https://visualstudio.microsoft.com/downloads/). While installing VSC, don't click on any of the options to install workloads. Instead, go to the individual components tab and choose the following:
-* MSVC v142 - VS 2019 C++ x64/x86 build tools (Latest)
-* Windows 10 SDK (10.0.17763.0)
-
-This will take a while and requires about 4GB of space. Once that is done you can open up a command line in the project's directory and run `lime test windows -debug` (remove "-debug" for official releases). Once that command finishes (it takes forever even on a higher end PC), it will automatically run the game. The .exe file will be under export\release\windows\bin.
-
-For Mac, you need to install [Xcode](https://apps.apple.com/us/app/xcode/id497799835). After that, run `lime test mac -debug` (remove "-debug" for official releases) in the project's directory. The .exe file will be in export/release/mac/bin.
-
-For Linux, you only need to open a terminal in the project directory and run `lime test linux -debug` (remove "-debug" for official releases). The executable file will be in export/release/linux/bin.
-
-To build for 32-bit, add `-32 -D 32bits` to the `lime test` command:
-
-`lime test windows -32 -D 32bits`
+#### Desktop (Windows, Mac, Linux)
+- **Windows:**
+  Install [Visual Studio Community](https://visualstudio.microsoft.com/downloads/) with *MSVC v142 C++ build tools* and *Windows 10 SDK*. Then run:
+  ```bash
+  lime test windows
+  ```
+- **Mac:**
+  Install Xcode, then run `lime test mac`.
+- **Linux:**
+  Run `lime test linux`.
+- **32-Bit Build:**
+  Add `-32 -D 32bits` (e.g. `lime test windows -32 -D 32bits`).

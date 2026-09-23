@@ -52,11 +52,12 @@ class CreditsState extends MusicBeatState
 		add(grpOptions);
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+			['HTML Psych'],
+			['MrRainbow',			'rainbow',			'Creator of HTML Psych',	'https://www.youtube.com/@mrrainbowoffical',			'FFC0CB'],
 			['Psych Engine Extra'],
 			['Leather128',			'leather',			'Leather Engine Creator\n(some code is from there)\n[NON-AFFILIATED]',	'https://www.youtube.com/channel/UCbCtO-ghipZessWaOBx8u1g',			'01A1FF'],
 			['srPerez',				'perez',			'Original 6K+ designs\n[NON-AFFILIATED]',								'https://twitter.com/NewSrPerez',									'FBCA20'],
 			['GitHub Contributors',	'github',			'Pull Requests to Psych Engine\n[NON-AFFILIATED]',						'https://github.com/ShadowMario/FNF-PsychEngine/pulls',				'546782'],
-			[''],
 			['Psych Engine Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',										'https://twitter.com/Shadow_Mario_',	'444444'],
 			['RiverOaken',			'river',			'Main Artist/Animator of Psych Engine',									'https://twitter.com/RiverOaken',		'B42F71'],

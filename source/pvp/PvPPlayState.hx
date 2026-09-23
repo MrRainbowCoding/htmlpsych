@@ -1017,6 +1017,7 @@ class PvPPlayState extends MusicBeatState {
 			{
 				resyncVocals();
 			}
+			if (FlxG.sound.music != null) FlxG.sound.music.volume = 1;
 			if (vocals != null) vocals.volume = 1;
 			if (vocalsDad != null) vocalsDad.volume = 1;
 			#if (js && html5)
@@ -1036,7 +1037,8 @@ class PvPPlayState extends MusicBeatState {
 				};
 				restoreHowl({0});
 				restoreHowl({1});
-			", vocals, vocalsDad);
+				restoreHowl({2});
+			", vocals, vocalsDad, FlxG.sound.music);
 			#end
 
 			if (startTimer != null && !startTimer.finished)

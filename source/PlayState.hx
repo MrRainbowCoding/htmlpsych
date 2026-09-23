@@ -114,6 +114,20 @@ class PlayState extends MusicBeatState
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
 
+	public static var mainWeekSongs:Array<String> = [
+		'tutorial', 'bopeebo', 'fresh', 'dad-battle', 'spookeez', 'south', 'monster',
+		'pico', 'philly-nice', 'blammed', 'satin-panties', 'high', 'milf',
+		'cocoa', 'eggnog', 'winter-horrorland', 'senpai', 'roses', 'thorns',
+		'ugh', 'guns', 'stress', 'test'
+	];
+
+	public static function isMainWeekSong(song:String):Bool
+	{
+		if (song == null) return false;
+		var formatted:String = Paths.formatToSongPath(song);
+		return mainWeekSongs.contains(formatted);
+	}
+
 	public var noteKillOffset:Float = 350;
 	public var spawnTime:Float = 2000;
 
@@ -585,7 +599,10 @@ class PlayState extends MusicBeatState
 			var filesPushed:Array<String> = [];
 			var foldersToCheck:Array<String> = [Paths.getPreloadPath('scripts/')];
 			#if MODS_ALLOWED
-			foldersToCheck.push(Paths.mods('scripts/'));
+			if (!isMainWeekSong(SONG.song))
+			{
+				foldersToCheck.push(Paths.mods('scripts/'));
+			}
 			#end
 
 			for (folder in foldersToCheck)
@@ -2359,11 +2376,11 @@ class PlayState extends MusicBeatState
 	{
 		if (ClientPrefs.showRatings)
 		{
-			scoreTxt.text = 'Score: ' + songScore + ' | Rating: ' + ratingName;
+			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingName;
 		}
 		else
 		{
-			scoreTxt.text = 'Score: ' + songScore + ' | Fails: ' + songMisses + ' | Rating: ' + ratingName;
+			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingName;
 		}
 		if (ratingName != '?')
 			scoreTxt.text += ' [${Highscore.floorDecimal(ratingPercent * 100, 2)}% | $ratingFC]';
@@ -2917,6 +2934,10 @@ class PlayState extends MusicBeatState
 			{
 				resyncVocals();
 			}
+			if (FlxG.sound.music != null)
+			{
+				FlxG.sound.music.volume = 1;
+			}
 			if (vocals != null) vocals.volume = 1;
 			if (vocalsDad != null) vocalsDad.volume = 1;
 			#if (js && html5)
@@ -2936,7 +2957,8 @@ class PlayState extends MusicBeatState
 				};
 				restoreHowl({0});
 				restoreHowl({1});
-			", vocals, vocalsDad);
+				restoreHowl({2});
+			", vocals, vocalsDad, FlxG.sound.music);
 			#end
 
 			if (startTimer != null && !startTimer.finished)
@@ -3065,12 +3087,12 @@ class PlayState extends MusicBeatState
 		}
 		if (vocals.length <= 0 || Conductor.songPosition <= vocals.length)
 		{
-			vocals.time = Conductor.songPosition;
+			vocals.time = FlxG.sound.music.time;
 			vocals.play();
 		}
 		if (vocalsDad.length <= 0 || Conductor.songPosition <= vocalsDad.length)
 		{
-			vocalsDad.time = Conductor.songPosition;
+			vocalsDad.time = FlxG.sound.music.time;
 			vocalsDad.play();
 		}
 
@@ -3140,10 +3162,22 @@ class PlayState extends MusicBeatState
 						vocals.play();
 						vocals.time = FlxG.sound.music.time;
 					}
-					if (foundDadVocals && vocalsDad != null && !vocalsDad.playing && (vocalsDad.length <= 0 || Conductor.songPosition < vocalsDad.length))
+					else if (vocals.playing && Math.abs(vocals.time - FlxG.sound.music.time) > 30)
 					{
-						vocalsDad.play();
-						vocalsDad.time = FlxG.sound.music.time;
+						vocals.time = FlxG.sound.music.time;
+					}
+
+					if (foundDadVocals && vocalsDad != null)
+					{
+						if (!vocalsDad.playing && (vocalsDad.length <= 0 || Conductor.songPosition < vocalsDad.length))
+						{
+							vocalsDad.play();
+							vocalsDad.time = FlxG.sound.music.time;
+						}
+						else if (vocalsDad.playing && Math.abs(vocalsDad.time - FlxG.sound.music.time) > 30)
+						{
+							vocalsDad.time = FlxG.sound.music.time;
+						}
 					}
 				}
 			}
@@ -5667,7 +5701,7 @@ class PlayState extends MusicBeatState
 	override function stepHit()
 	{
 		super.stepHit();
-		var resyncLimit:Float = #if (web || html5) 100.0 #else 20.0 #end * playbackRate;
+		var resyncLimit:Float = #if (web || html5) 35.0 #else 20.0 #end * playbackRate;
 		if (generatedMusic
 			&& (Math.abs(FlxG.sound.music.time - Conductor.songPosition) > resyncLimit
 				|| (SONG.needsVoices
@@ -5875,13 +5909,19 @@ class PlayState extends MusicBeatState
 					continue;
 
 				var ret:Dynamic = script.call(event, args);
-				if (ret == FunkinLua.Function_StopLua && !ignoreStops)
+				if ((ret == FunkinLua.Function_Stop || ret == FunkinLua.Function_StopLua) && !ignoreStops)
+				{
+					returnVal = FunkinLua.Function_Stop;
 					break;
+				}
 
-				if (ret != FunkinLua.Function_Continue && ret != true && ret != false)
+				if (ret != FunkinLua.Function_Continue && ret != true && ret != false && ret != null)
 					returnVal = ret;
 			}
 			#end
+
+			if (returnVal == FunkinLua.Function_Stop && !ignoreStops)
+				return returnVal;
 
 			#if HSCRIPT_ALLOWED
 			for (script in hscriptMap.keys())
@@ -5891,10 +5931,13 @@ class PlayState extends MusicBeatState
 					continue;
 
 				var ret:Dynamic = callHscript(script, event, args);
-				if (ret == FunkinLua.Function_StopLua && !ignoreStops)
+				if ((ret == FunkinLua.Function_Stop || ret == FunkinLua.Function_StopLua) && !ignoreStops)
+				{
+					returnVal = FunkinLua.Function_Stop;
 					break;
+				}
 
-				if (ret != FunkinLua.Function_Continue)
+				if (ret != null && ret != FunkinLua.Function_Continue)
 					returnVal = ret;
 			}
 			#end

@@ -339,6 +339,12 @@ class Paths
 		}
 		#end
 		
+		#if (js && html5)
+		if (js.Syntax.code("typeof window !== 'undefined' && window.__findAsset && (window.__findAsset({0}) !== null || window.__findImage({0}) !== null)", key)) {
+			return true;
+		}
+		#end
+
 		if (OpenFlAssets.exists(key, type)) {
 			return true;
 		}
@@ -506,6 +512,11 @@ class Paths
 			return File.getContent(path);
 		return null;
 		#else
+		#if (js && html5)
+		var embedded:String = js.Syntax.code("typeof window !== 'undefined' && window.__findAsset ? window.__findAsset({0}) : null", path);
+		if (embedded != null)
+			return embedded;
+		#end
 		return OpenFlAssets.getText(path);
 		#end
 	}

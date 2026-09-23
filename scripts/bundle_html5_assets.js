@@ -231,13 +231,82 @@ const textJsContent = `// Auto-generated offline asset bundle & HTML5/file:// po
       }
     }
   }
+  function hookOpenFlAssets() {
+    if (window.$hxClasses && window.$hxClasses["openfl.utils.Assets"]) {
+      var AssetsCls = window.$hxClasses["openfl.utils.Assets"];
+      if (!AssetsCls.__hookedEmbedded) {
+        AssetsCls.__hookedEmbedded = true;
+        var origGetText = AssetsCls.getText;
+        AssetsCls.getText = function(id) {
+          var found = findAsset(id);
+          if (found !== null) return found;
+          return origGetText ? origGetText.call(this, id) : null;
+        };
+        var origExists = AssetsCls.exists;
+        AssetsCls.exists = function(id, type) {
+          if (findAsset(id) !== null) return true;
+          if (findImage(id) !== null) return true;
+          return origExists ? origExists.call(this, id, type) : false;
+        };
+      }
+    }
+    if (window.$hxClasses && window.$hxClasses["lime.utils.Assets"]) {
+      var LimeAssetsCls = window.$hxClasses["lime.utils.Assets"];
+      if (!LimeAssetsCls.__hookedEmbedded) {
+        LimeAssetsCls.__hookedEmbedded = true;
+        var origGetText = LimeAssetsCls.getText;
+        LimeAssetsCls.getText = function(id) {
+          var found = findAsset(id);
+          if (found !== null) return found;
+          return origGetText ? origGetText.call(this, id) : null;
+        };
+        var origExists = LimeAssetsCls.exists;
+        LimeAssetsCls.exists = function(id, type) {
+          if (findAsset(id) !== null) return true;
+          if (findImage(id) !== null) return true;
+          return origExists ? origExists.call(this, id, type) : false;
+        };
+      }
+    }
+  }
+  function hookFlxMouse() {
+    if (window.$hxClasses && window.$hxClasses["flixel.input.mouse.FlxMouse"]) {
+      var MouseCls = window.$hxClasses["flixel.input.mouse.FlxMouse"];
+      if (MouseCls && MouseCls.prototype && !MouseCls.prototype.__hookedGetWorldPos) {
+        MouseCls.prototype.__hookedGetWorldPos = true;
+        var origGetWorldPos = MouseCls.prototype.getWorldPosition;
+        MouseCls.prototype.getWorldPosition = function(Camera, point) {
+          if (!Camera) {
+            var FlxG = window.$hxClasses["flixel.FlxG"];
+            Camera = (FlxG && FlxG.camera) ? FlxG.camera : ((FlxG && FlxG.cameras && FlxG.cameras.list) ? FlxG.cameras.list[0] : null);
+          }
+          if (!Camera) {
+            if (!point) {
+              var FlxPoint = window.$hxClasses["flixel.math.FlxPoint"];
+              return FlxPoint ? FlxPoint.get(0, 0) : { x: 0, y: 0 };
+            }
+            point.x = 0;
+            point.y = 0;
+            return point;
+          }
+          return origGetWorldPos.call(this, Camera, point);
+        };
+      }
+    }
+  }
   hookLime();
-  var hookTimer = setInterval(function() {
+  hookOpenFlAssets();
+  hookFlxMouse();
+  var assetHookInterval = setInterval(function() {
     hookLime();
-    if (window.$hxClasses && window.$hxClasses["lime._internal.backend.html5.HTML5HTTPRequest"] && window.$hxClasses["lime._internal.backend.html5.HTML5HTTPRequest"].__hookedLoadImage) {
-      clearInterval(hookTimer);
+    hookOpenFlAssets();
+    hookFlxMouse();
+    if (window.$hxClasses && window.$hxClasses["openfl.utils.Assets"] && window.$hxClasses["openfl.utils.Assets"].__hookedEmbedded &&
+        window.$hxClasses["lime._internal.backend.html5.HTML5HTTPRequest"] && window.$hxClasses["lime._internal.backend.html5.HTML5HTTPRequest"].__hookedLoadImage) {
+      clearInterval(assetHookInterval);
     }
   }, 20);
+
 
   // Auto-initialize Fengari JS library into any luaState
   function patchFengari() {
@@ -604,17 +673,14 @@ if (typeof flixel_sound_FlxSound !== 'undefined' && flixel_sound_FlxSound.protot
   };
   var origFlxSoundPause = flixel_sound_FlxSound.prototype.pause;
   flixel_sound_FlxSound.prototype.pause = function() {
-    this.volume = 0;
     if (this._sound && this._sound.__buffer && this._sound.__buffer.__srcHowl) {
       var h = this._sound.__buffer.__srcHowl;
       try { h.pause(); } catch(e) {}
-      try { h.stop(); } catch(e) {}
       if (h._sounds) {
         for (var i = 0; i < h._sounds.length; i++) {
           var s = h._sounds[i];
           if (s && s._node) {
             try { s._node.pause(); } catch(e) {}
-            try { s._node.volume = 0; } catch(e) {}
           }
         }
       }
@@ -623,6 +689,9 @@ if (typeof flixel_sound_FlxSound !== 'undefined' && flixel_sound_FlxSound.protot
   };
   var origFlxSoundPlay = flixel_sound_FlxSound.prototype.play;
   flixel_sound_FlxSound.prototype.play = function(ForceRestart, StartTime, EndTime) {
+    if (this.volume === 0) {
+      this.volume = 1;
+    }
     if (this._sound && this._sound.__buffer && this._sound.__buffer.__srcHowl) {
       var h = this._sound.__buffer.__srcHowl;
       var targetVol = (this.volume > 0) ? this.volume : 1;
@@ -634,9 +703,6 @@ if (typeof flixel_sound_FlxSound !== 'undefined' && flixel_sound_FlxSound.protot
           }
         }
       }
-    }
-    if (this.volume === 0 && !this._paused) {
-      this.volume = 1;
     }
     return origFlxSoundPlay.call(this, ForceRestart, StartTime, EndTime);
   };

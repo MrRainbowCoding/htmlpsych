@@ -67,8 +67,22 @@ class StageData {
 		if (Paths.exists(path)) {
 			rawJson = Paths.getContent(path);
 		}
-		else
-		{
+		if (rawJson == null && Paths.exists('stages/$stage.json')) {
+			rawJson = Paths.getContent('stages/$stage.json');
+		}
+		#if MODS_ALLOWED
+		if (rawJson == null && Paths.exists(Paths.mods('stages/$stage.json'))) {
+			rawJson = Paths.getContent(Paths.mods('stages/$stage.json'));
+		}
+		#end
+		#if (js && html5)
+		if (rawJson == null) {
+			rawJson = js.Syntax.code("typeof window !== 'undefined' && window.__findAsset ? (window.__findAsset({0}) || window.__findAsset('mods/stages/' + {1} + '.json') || window.__findAsset('stages/' + {1} + '.json') || window.__findAsset('assets/stages/' + {1} + '.json')) : null", path, stage);
+		}
+		#end
+
+		if (rawJson == null) {
+			trace('Could not find stage file: stages/$stage.json');
 			return null;
 		}
 

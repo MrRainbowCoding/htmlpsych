@@ -640,6 +640,12 @@ class FunkinLua
 
 			if (leObj != null)
 			{
+				if (PlayState.instance != null)
+				{
+					if (leObj == PlayState.instance.boyfriend) leObj = PlayState.instance.boyfriendGroup;
+					else if (leObj == PlayState.instance.dad) leObj = PlayState.instance.dadGroup;
+					else if (leObj == PlayState.instance.gf) leObj = PlayState.instance.gfGroup;
+				}
 				return getInstance().members.indexOf(leObj);
 			}
 			luaTrace('Object $obj doesn\'t exist!', false, false, FlxColor.RED);
@@ -656,6 +662,12 @@ class FunkinLua
 
 			if (leObj != null)
 			{
+				if (PlayState.instance != null)
+				{
+					if (leObj == PlayState.instance.boyfriend) leObj = PlayState.instance.boyfriendGroup;
+					else if (leObj == PlayState.instance.dad) leObj = PlayState.instance.dadGroup;
+					else if (leObj == PlayState.instance.gf) leObj = PlayState.instance.gfGroup;
+				}
 				getInstance().remove(leObj, true);
 				getInstance().insert(position, leObj);
 				return;
@@ -3783,6 +3795,12 @@ class FunkinLua
 
 			if (leObj != null)
 			{
+				if (PlayState.instance != null)
+				{
+					if (leObj == PlayState.instance.boyfriend) leObj = PlayState.instance.boyfriendGroup;
+					else if (leObj == PlayState.instance.dad) leObj = PlayState.instance.dadGroup;
+					else if (leObj == PlayState.instance.gf) leObj = PlayState.instance.gfGroup;
+				}
 				return getInstance().members.indexOf(leObj);
 			}
 			return -1;
@@ -3798,6 +3816,12 @@ class FunkinLua
 
 			if (leObj != null)
 			{
+				if (PlayState.instance != null)
+				{
+					if (leObj == PlayState.instance.boyfriend) leObj = PlayState.instance.boyfriendGroup;
+					else if (leObj == PlayState.instance.dad) leObj = PlayState.instance.dadGroup;
+					else if (leObj == PlayState.instance.gf) leObj = PlayState.instance.gfGroup;
+				}
 				getInstance().remove(leObj, true);
 				getInstance().insert(position, leObj);
 			}
