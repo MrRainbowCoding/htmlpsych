@@ -333,19 +333,22 @@ class Paths
 
 	inline static public function exists(key:String, type:AssetType = null, ?library:String)
 	{
+		var cleanKey:String = key;
+		if (cleanKey != null && cleanKey.contains(':'))
+			cleanKey = cleanKey.substring(cleanKey.indexOf(':') + 1);
 		#if sys
-		if (FileSystem.exists(key)) {
+		if (FileSystem.exists(key) || FileSystem.exists(cleanKey)) {
 			return true;
 		}
 		#end
 		
 		#if (js && html5)
-		if (js.Syntax.code("typeof window !== 'undefined' && window.__findAsset && (window.__findAsset({0}) !== null || window.__findImage({0}) !== null)", key)) {
+		if (js.Syntax.code("typeof window !== 'undefined' && ((window.__findAsset && (window.__findAsset({0}) !== null || window.__findAsset({1}) !== null)) || (window.__findImage && (window.__findImage({0}) !== null || window.__findImage({1}) !== null)))", key, cleanKey)) {
 			return true;
 		}
 		#end
 
-		if (OpenFlAssets.exists(key, type)) {
+		if (OpenFlAssets.exists(key, type) || (cleanKey != key && OpenFlAssets.exists(cleanKey, type))) {
 			return true;
 		}
 		return false;
@@ -505,9 +508,9 @@ class Paths
 	}
 
 	inline public static function getContent(path:String) {
-		#if sys
-		if (path.contains(':'))
+		if (path != null && path.contains(':'))
 			path = path.substring(path.indexOf(':') + 1);
+		#if sys
 		if (FileSystem.exists(path))
 			return File.getContent(path);
 		return null;

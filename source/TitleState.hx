@@ -541,7 +541,9 @@ class TitleState extends MusicBeatState
 			switch (sickBeats)
 			{
 				case 1:
-					CoolUtil.playMenuMusic(0);
+					if (FlxG.sound.music == null) {
+						CoolUtil.playMenuMusic(0);
+					}
 					FlxG.sound.music.fadeIn(4, 0, ClientPrefs.menuMusicVolume);
 				case 2:
 					#if PSYCH_WATERMARKS

@@ -1533,6 +1533,13 @@ class PlayState extends MusicBeatState
 			{
 				doPush = true;
 			}
+			#if MODS_ALLOWED
+			if (!doPush && Paths.exists(Paths.mods('stages/$curStage.lua'), TEXT))
+			{
+				luaFile = Paths.mods('stages/$curStage.lua');
+				doPush = true;
+			}
+			#end
 
 			if (doPush)
 				luaArray.push(new FunkinLua(luaFile));
@@ -1545,6 +1552,13 @@ class PlayState extends MusicBeatState
 			{
 				doPush = true;
 			}
+			#if MODS_ALLOWED
+			if (!doPush && Paths.exists(Paths.mods('stages/$curStage.hscript'), TEXT))
+			{
+				hscriptFile = Paths.mods('stages/$curStage.hscript');
+				doPush = true;
+			}
+			#end
 
 			if (doPush)
 				addHscript(hscriptFile);
@@ -1589,6 +1603,7 @@ class PlayState extends MusicBeatState
 		{
 			group.add(char);
 			char.addedToGroup = true;
+			char.scrollFactor.set(scrollX, scrollY);
 		}
 		switch (char.curCharacter)
 		{
@@ -2456,10 +2471,12 @@ class PlayState extends MusicBeatState
 		if (playbackRate == 1)
 			FlxG.sound.music.onComplete = onSongComplete;
 		vocals.volume = 1;
+		vocals.time = FlxG.sound.music.time;
 		vocals.play();
 		if (inEditor)
 			vocals.time = startPos;
 		vocalsDad.volume = 1;
+		vocalsDad.time = FlxG.sound.music.time;
 		vocalsDad.play();
 		if (inEditor)
 			vocalsDad.time = startPos;
@@ -3070,30 +3087,19 @@ class PlayState extends MusicBeatState
 			return;
 		}
 
-		if (playbackRate < 1)
-			FlxG.sound.music.pause();
-		vocals.pause();
-		vocalsDad.pause();
+		Conductor.songPosition = FlxG.sound.music.time;
 
-		if (playbackRate >= 1)
-		{
-			FlxG.sound.music.play();
-			Conductor.songPosition = FlxG.sound.music.time;
-		}
-		else
-		{
-			FlxG.sound.music.time = Conductor.songPosition;
-			FlxG.sound.music.play();
-		}
 		if (vocals.length <= 0 || Conductor.songPosition <= vocals.length)
 		{
 			vocals.time = FlxG.sound.music.time;
-			vocals.play();
+			if (!vocals.playing)
+				vocals.play();
 		}
-		if (vocalsDad.length <= 0 || Conductor.songPosition <= vocalsDad.length)
+		if (vocalsDad != null && (vocalsDad.length <= 0 || Conductor.songPosition <= vocalsDad.length))
 		{
 			vocalsDad.time = FlxG.sound.music.time;
-			vocalsDad.play();
+			if (!vocalsDad.playing)
+				vocalsDad.play();
 		}
 
 		setSongPitch();
@@ -3159,25 +3165,14 @@ class PlayState extends MusicBeatState
 				{
 					if (!vocals.playing && (vocals.length <= 0 || Conductor.songPosition < vocals.length))
 					{
+						vocals.time = FlxG.sound.music.time;
 						vocals.play();
-						vocals.time = FlxG.sound.music.time;
-					}
-					else if (vocals.playing && Math.abs(vocals.time - FlxG.sound.music.time) > 30)
-					{
-						vocals.time = FlxG.sound.music.time;
 					}
 
-					if (foundDadVocals && vocalsDad != null)
+					if (foundDadVocals && vocalsDad != null && !vocalsDad.playing && (vocalsDad.length <= 0 || Conductor.songPosition < vocalsDad.length))
 					{
-						if (!vocalsDad.playing && (vocalsDad.length <= 0 || Conductor.songPosition < vocalsDad.length))
-						{
-							vocalsDad.play();
-							vocalsDad.time = FlxG.sound.music.time;
-						}
-						else if (vocalsDad.playing && Math.abs(vocalsDad.time - FlxG.sound.music.time) > 30)
-						{
-							vocalsDad.time = FlxG.sound.music.time;
-						}
+						vocalsDad.time = FlxG.sound.music.time;
+						vocalsDad.play();
 					}
 				}
 			}
@@ -3745,11 +3740,10 @@ class PlayState extends MusicBeatState
 			}
 			#if (js && html5)
 			js.Syntax.code("
-				var stopHowl = function(snd) {
+				var pauseHowl = function(snd) {
 					if (snd && snd._sound && snd._sound.__buffer && snd._sound.__buffer.__srcHowl) {
 						var h = snd._sound.__buffer.__srcHowl;
 						try { h.pause(); } catch(e) {}
-						try { h.stop(); } catch(e) {}
 						if (h._sounds) {
 							for (var i = 0; i < h._sounds.length; i++) {
 								var s = h._sounds[i];
@@ -3761,9 +3755,9 @@ class PlayState extends MusicBeatState
 						}
 					}
 				};
-				stopHowl({0});
-				stopHowl({1});
-				stopHowl({2});
+				pauseHowl({0});
+				pauseHowl({1});
+				pauseHowl({2});
 			", vocals, vocalsDad, FlxG.sound.music);
 			#end
 			@:privateAccess { // This is so hiding the debugger doesn't play the music again
@@ -5701,14 +5695,23 @@ class PlayState extends MusicBeatState
 	override function stepHit()
 	{
 		super.stepHit();
-		var resyncLimit:Float = #if (web || html5) 35.0 #else 20.0 #end * playbackRate;
-		if (generatedMusic
-			&& (Math.abs(FlxG.sound.music.time - Conductor.songPosition) > resyncLimit
-				|| (SONG.needsVoices
-					&& ((Math.abs(vocals.time - Conductor.songPosition) > resyncLimit)
-						|| (foundDadVocals && Math.abs(vocalsDad.time - Conductor.songPosition) > resyncLimit)))))
+		var resyncLimit:Float = #if (web || html5) 150.0 #else 20.0 #end * playbackRate;
+		if (generatedMusic && FlxG.sound.music != null && FlxG.sound.music.playing)
 		{
-			resyncVocals();
+			if (Math.abs(FlxG.sound.music.time - Conductor.songPosition) > 20.0 * playbackRate)
+			{
+				Conductor.songPosition = FlxG.sound.music.time;
+			}
+
+			if (SONG.needsVoices && vocals != null)
+			{
+				var vocalDesynced:Bool = Math.abs(vocals.time - FlxG.sound.music.time) > resyncLimit;
+				var dadDesynced:Bool = foundDadVocals && vocalsDad != null && (Math.abs(vocalsDad.time - FlxG.sound.music.time) > resyncLimit);
+				if (vocalDesynced || dadDesynced || !vocals.playing)
+				{
+					resyncVocals();
+				}
+			}
 		}
 
 		if (curStep == lastStepHit)

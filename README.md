@@ -76,10 +76,10 @@ If you prefer manual setup:
    haxelib run lime setup flixel
    haxelib run lime setup
    haxelib install flixel-tools
-   haxelib run flixel-tools setup
    haxelib install flixel-addons
    haxelib install flixel-ui
-   haxelib install hscript
+   haxelib install hscript 2.5.0
+   haxelib set hscript 2.5.0
    haxelib install hxCodec
    haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
    haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc

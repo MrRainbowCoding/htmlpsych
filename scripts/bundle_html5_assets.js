@@ -71,6 +71,7 @@ const textJsContent = `// Auto-generated offline asset bundle & HTML5/file:// po
     if (!url || typeof url !== 'string') return '';
     var clean = url.split('?')[0].split('#')[0];
     clean = clean.replace(/\\\\/g, '/');
+    clean = clean.replace(/^[A-Za-z0-9_-]+:/, '');
     clean = clean.replace(/^file:\\/\\/\\/[A-Za-z]:\\/.*?\\/(assets|manifest|mods|flixel)\\//i, '$1/');
     clean = clean.replace(/^file:\\/\\/\\/[A-Za-z]:\\/.*?\\/export\\/release\\/html5\\/bin\\//i, '');
     clean = clean.replace(/^\\.\\//, '').replace(/^\\//, '');
@@ -86,6 +87,32 @@ const textJsContent = `// Auto-generated offline asset bundle & HTML5/file:// po
     if (window.__EMBEDDED_ASSETS__.hasOwnProperty(clean)) {
       return window.__EMBEDDED_ASSETS__[clean];
     }
+    if (window.__EMBEDDED_ASSETS__.hasOwnProperty('./' + clean)) {
+      return window.__EMBEDDED_ASSETS__['./' + clean];
+    }
+    if (window.__EMBEDDED_ASSETS__.hasOwnProperty('assets/' + clean)) {
+      return window.__EMBEDDED_ASSETS__['assets/' + clean];
+    }
+    if (window.__EMBEDDED_ASSETS__.hasOwnProperty('mods/' + clean)) {
+      return window.__EMBEDDED_ASSETS__['mods/' + clean];
+    }
+    if (clean.startsWith('assets/')) {
+      var sharedClean = clean.replace(/^assets\\//, 'assets/shared/');
+      if (window.__EMBEDDED_ASSETS__.hasOwnProperty(sharedClean)) {
+        return window.__EMBEDDED_ASSETS__[sharedClean];
+      }
+      var preloadClean = clean.replace(/^assets\\//, 'assets/preload/');
+      if (window.__EMBEDDED_ASSETS__.hasOwnProperty(preloadClean)) {
+        return window.__EMBEDDED_ASSETS__[preloadClean];
+      }
+    }
+    if (clean.startsWith('assets/shared/')) {
+      var unsharedClean = clean.replace(/^assets\\/shared\\//, 'assets/');
+      if (window.__EMBEDDED_ASSETS__.hasOwnProperty(unsharedClean)) {
+        return window.__EMBEDDED_ASSETS__[unsharedClean];
+      }
+    }
+
     var prefixes = ['assets/', 'manifest/', 'mods/', 'flixel/'];
     for (var i = 0; i < prefixes.length; i++) {
       var p = prefixes[i];
@@ -95,6 +122,12 @@ const textJsContent = `// Auto-generated offline asset bundle & HTML5/file:// po
         if (window.__EMBEDDED_ASSETS__.hasOwnProperty(sub)) {
           return window.__EMBEDDED_ASSETS__[sub];
         }
+      }
+    }
+
+    for (var k in window.__EMBEDDED_ASSETS__) {
+      if (k.endsWith('/' + clean) || clean.endsWith('/' + k) || (clean.length > 5 && k.endsWith(clean))) {
+        return window.__EMBEDDED_ASSETS__[k];
       }
     }
     return null;
@@ -114,6 +147,28 @@ const textJsContent = `// Auto-generated offline asset bundle & HTML5/file:// po
     if (window.__EMBEDDED_IMAGES__.hasOwnProperty('./' + clean)) {
       return window.__EMBEDDED_IMAGES__['./' + clean];
     }
+    if (window.__EMBEDDED_IMAGES__.hasOwnProperty('assets/' + clean)) {
+      return window.__EMBEDDED_IMAGES__['assets/' + clean];
+    }
+    if (window.__EMBEDDED_IMAGES__.hasOwnProperty('mods/' + clean)) {
+      return window.__EMBEDDED_IMAGES__['mods/' + clean];
+    }
+    if (clean.startsWith('assets/')) {
+      var sharedClean = clean.replace(/^assets\\//, 'assets/shared/');
+      if (window.__EMBEDDED_IMAGES__.hasOwnProperty(sharedClean)) {
+        return window.__EMBEDDED_IMAGES__[sharedClean];
+      }
+      var preloadClean = clean.replace(/^assets\\//, 'assets/preload/');
+      if (window.__EMBEDDED_IMAGES__.hasOwnProperty(preloadClean)) {
+        return window.__EMBEDDED_IMAGES__[preloadClean];
+      }
+    }
+    if (clean.startsWith('assets/shared/')) {
+      var unsharedClean = clean.replace(/^assets\\/shared\\//, 'assets/');
+      if (window.__EMBEDDED_IMAGES__.hasOwnProperty(unsharedClean)) {
+        return window.__EMBEDDED_IMAGES__[unsharedClean];
+      }
+    }
 
     var prefixes = ['assets/', 'mods/', 'flixel/'];
     for (var i = 0; i < prefixes.length; i++) {
@@ -128,7 +183,7 @@ const textJsContent = `// Auto-generated offline asset bundle & HTML5/file:// po
     }
 
     for (var k in window.__EMBEDDED_IMAGES__) {
-      if (clean.endsWith(k) || url.endsWith(k)) {
+      if (clean.endsWith(k) || url.endsWith(k) || k.endsWith('/' + clean) || (clean.length > 5 && k.endsWith(clean))) {
         return window.__EMBEDDED_IMAGES__[k];
       }
     }
@@ -240,13 +295,59 @@ const textJsContent = `// Auto-generated offline asset bundle & HTML5/file:// po
         AssetsCls.getText = function(id) {
           var found = findAsset(id);
           if (found !== null) return found;
-          return origGetText ? origGetText.call(this, id) : null;
+          try {
+            return origGetText ? origGetText.call(this, id) : null;
+          } catch(e) {
+            return null;
+          }
         };
         var origExists = AssetsCls.exists;
         AssetsCls.exists = function(id, type) {
           if (findAsset(id) !== null) return true;
           if (findImage(id) !== null) return true;
-          return origExists ? origExists.call(this, id, type) : false;
+          try {
+            return origExists ? origExists.call(this, id, type) : false;
+          } catch(e) {
+            return false;
+          }
+        };
+        var origGetBitmapData = AssetsCls.getBitmapData;
+        AssetsCls.getBitmapData = function(id, useCache) {
+          if (useCache == null) useCache = true;
+          if (useCache && AssetsCls.cache && typeof AssetsCls.cache.hasBitmapData === 'function' && AssetsCls.cache.hasBitmapData(id)) {
+            return AssetsCls.cache.getBitmapData(id);
+          }
+          var clean = cleanUrl(id);
+          if (useCache && AssetsCls.cache && typeof AssetsCls.cache.hasBitmapData === 'function' && AssetsCls.cache.hasBitmapData(clean)) {
+            return AssetsCls.cache.getBitmapData(clean);
+          }
+          var foundImg = findImage(id);
+          if (foundImg) {
+            var dataUri = (typeof foundImg === 'string') ? foundImg : (foundImg.src || '');
+            var imgEl = new Image();
+            imgEl.src = dataUri;
+            var ImageCls = window.$hxClasses["lime.graphics.Image"];
+            var BitmapDataCls = window.$hxClasses["openfl.display.BitmapData"];
+            if (ImageCls && ImageCls.fromImageElement && BitmapDataCls && BitmapDataCls.fromImage) {
+              var limeImg = ImageCls.fromImageElement(imgEl);
+              if (limeImg) {
+                var bmp = BitmapDataCls.fromImage(limeImg);
+                if (bmp) {
+                  if (useCache && AssetsCls.cache && typeof AssetsCls.cache.setBitmapData === 'function') {
+                    AssetsCls.cache.setBitmapData(id, bmp);
+                    AssetsCls.cache.setBitmapData(clean, bmp);
+                  }
+                  return bmp;
+                }
+              }
+            }
+          }
+          try {
+            return origGetBitmapData ? origGetBitmapData.call(this, id, useCache) : null;
+          } catch(e) {
+            console.warn('[Assets] Could not getBitmapData for:', id);
+            return null;
+          }
         };
       }
     }
@@ -254,17 +355,45 @@ const textJsContent = `// Auto-generated offline asset bundle & HTML5/file:// po
       var LimeAssetsCls = window.$hxClasses["lime.utils.Assets"];
       if (!LimeAssetsCls.__hookedEmbedded) {
         LimeAssetsCls.__hookedEmbedded = true;
-        var origGetText = LimeAssetsCls.getText;
+        var origLimeGetText = LimeAssetsCls.getText;
         LimeAssetsCls.getText = function(id) {
           var found = findAsset(id);
           if (found !== null) return found;
-          return origGetText ? origGetText.call(this, id) : null;
+          try {
+            return origLimeGetText ? origLimeGetText.call(this, id) : null;
+          } catch(e) {
+            return null;
+          }
         };
-        var origExists = LimeAssetsCls.exists;
+        var origLimeExists = LimeAssetsCls.exists;
         LimeAssetsCls.exists = function(id, type) {
           if (findAsset(id) !== null) return true;
           if (findImage(id) !== null) return true;
-          return origExists ? origExists.call(this, id, type) : false;
+          try {
+            return origLimeExists ? origLimeExists.call(this, id, type) : false;
+          } catch(e) {
+            return false;
+          }
+        };
+        var origLimeGetImage = LimeAssetsCls.getImage;
+        LimeAssetsCls.getImage = function(id, useCache) {
+          var foundImg = findImage(id);
+          if (foundImg) {
+            var dataUri = (typeof foundImg === 'string') ? foundImg : (foundImg.src || '');
+            var imgEl = new Image();
+            imgEl.src = dataUri;
+            var ImageCls = window.$hxClasses["lime.graphics.Image"];
+            if (ImageCls && ImageCls.fromImageElement) {
+              var limeImg = ImageCls.fromImageElement(imgEl);
+              if (limeImg) return limeImg;
+            }
+          }
+          try {
+            return origLimeGetImage ? origLimeGetImage.call(this, id, useCache) : null;
+          } catch(e) {
+            console.warn('[LimeAssets] Could not getImage for:', id);
+            return null;
+          }
         };
       }
     }
@@ -637,10 +766,11 @@ if (fs.existsSync(htpsychFile)) {
     changed = true;
   }
 
-  // 4. Define dynamic _length and length getters on flixel_sound_FlxSound.prototype
+  // 4. Define dynamic length, getters, and seamless pause/resume/seek on flixel_sound_FlxSound.prototype
   const hookMarker = 'var flixel_sound_FlxSoundGroup = function';
   const flxSoundPatch = `
-if (typeof flixel_sound_FlxSound !== 'undefined' && flixel_sound_FlxSound.prototype && !flixel_sound_FlxSound.prototype.__dynamicLengthPatched) {
+if (typeof flixel_sound_FlxSound !== 'undefined' && flixel_sound_FlxSound.prototype && !flixel_sound_FlxSound.prototype.__flxSoundSyncedPatched) {
+  flixel_sound_FlxSound.prototype.__flxSoundSyncedPatched = true;
   flixel_sound_FlxSound.prototype.__dynamicLengthPatched = true;
   Object.defineProperty(flixel_sound_FlxSound.prototype, '_length', {
     configurable: true,
@@ -671,41 +801,149 @@ if (typeof flixel_sound_FlxSound !== 'undefined' && flixel_sound_FlxSound.protot
   flixel_sound_FlxSound.prototype.get_length = function() {
     return this._length;
   };
-  var origFlxSoundPause = flixel_sound_FlxSound.prototype.pause;
+
+  // Safe playing getter: true only if channel exists and not paused
+  flixel_sound_FlxSound.prototype.get_playing = function() {
+    return this._channel != null && !this._paused;
+  };
+  Object.defineProperty(flixel_sound_FlxSound.prototype, 'playing', {
+    configurable: true,
+    enumerable: true,
+    get: function() {
+      return this.get_playing();
+    }
+  });
+
+  // Non-destructive pause: pauses Howler and audio nodes without destroying channel or resetting currentTime
   flixel_sound_FlxSound.prototype.pause = function() {
+    if (this._channel == null) return this;
+    try {
+      this._time = this._channel.get_position();
+    } catch(e) {}
+    this._paused = true;
     if (this._sound && this._sound.__buffer && this._sound.__buffer.__srcHowl) {
       var h = this._sound.__buffer.__srcHowl;
-      try { h.pause(); } catch(e) {}
-      if (h._sounds) {
-        for (var i = 0; i < h._sounds.length; i++) {
-          var s = h._sounds[i];
+      var soundId = (this._channel && this._channel.__audioSource && this._channel.__audioSource.__backend) ? this._channel.__audioSource.__backend.id : -1;
+      if (soundId !== -1) {
+        try { h.pause(soundId); } catch(e) {}
+        try {
+          var s = h._soundById(soundId);
           if (s && s._node) {
-            try { s._node.pause(); } catch(e) {}
+            s._node.pause();
           }
-        }
+        } catch(e) {}
+      } else {
+        try { h.pause(); } catch(e) {}
       }
     }
-    return origFlxSoundPause.call(this);
+    return this;
   };
+
+  // Seamless resume/play: unpauses existing channel if paused, without destroying/re-creating
   var origFlxSoundPlay = flixel_sound_FlxSound.prototype.play;
   flixel_sound_FlxSound.prototype.play = function(ForceRestart, StartTime, EndTime) {
-    if (this.volume === 0) {
-      this.volume = 1;
+    if (StartTime == null) StartTime = 0.0;
+    if (ForceRestart == null) ForceRestart = false;
+    if (!this.exists) return this;
+
+    if (ForceRestart) {
+      this.cleanup(false, true);
     }
-    if (this._sound && this._sound.__buffer && this._sound.__buffer.__srcHowl) {
-      var h = this._sound.__buffer.__srcHowl;
-      var targetVol = (this.volume > 0) ? this.volume : 1;
-      if (h._sounds) {
-        for (var i = 0; i < h._sounds.length; i++) {
-          var s = h._sounds[i];
-          if (s && s._node) {
-            try { s._node.volume = targetVol; } catch(e) {}
-          }
+
+    if (this._channel != null && !this._paused && !ForceRestart) {
+      return this;
+    }
+
+    if (this._paused && this._channel != null && !ForceRestart) {
+      this._paused = false;
+      if (this._sound && this._sound.__buffer && this._sound.__buffer.__srcHowl) {
+        var h = this._sound.__buffer.__srcHowl;
+        var soundId = (this._channel && this._channel.__audioSource && this._channel.__audioSource.__backend) ? this._channel.__audioSource.__backend.id : -1;
+        if (soundId !== -1) {
+          try { h.play(soundId); } catch(e) {}
+          try { h.volume(this.volume, soundId); } catch(e) {}
+          try {
+            var s = h._soundById(soundId);
+            if (s && s._node) {
+              s._node.volume = this.volume;
+              if (s._node.paused) {
+                s._node.play();
+              }
+            }
+          } catch(e) {}
+        } else {
+          try { h.play(); } catch(e) {}
         }
       }
+      this.endTime = EndTime;
+      return this;
     }
-    return origFlxSoundPlay.call(this, ForceRestart, StartTime, EndTime);
+
+    var res = origFlxSoundPlay.call(this, ForceRestart, StartTime, EndTime);
+    if (this._sound && this._sound.__buffer && this._sound.__buffer.__srcHowl) {
+      var h = this._sound.__buffer.__srcHowl;
+      var soundId = (this._channel && this._channel.__audioSource && this._channel.__audioSource.__backend) ? this._channel.__audioSource.__backend.id : -1;
+      if (soundId !== -1) {
+        try { h.volume(this.volume, soundId); } catch(e) {}
+        try {
+          var s = h._soundById(soundId);
+          if (s && s._node) {
+            s._node.volume = this.volume;
+            if (s._node.paused) {
+              s._node.play();
+            }
+          }
+        } catch(e) {}
+      }
+    }
+    return res;
   };
+
+  flixel_sound_FlxSound.prototype.resume = function() {
+    if (this._paused) {
+      this.play();
+    }
+    return this;
+  };
+
+  // Seamless set_time: seeks Howl and audio elements without destroying channel
+  var origFlxSoundSetTime = flixel_sound_FlxSound.prototype.set_time;
+  flixel_sound_FlxSound.prototype.set_time = function(time) {
+    this._time = time;
+    if (this._channel != null && this._sound && this._sound.__buffer && this._sound.__buffer.__srcHowl) {
+      var h = this._sound.__buffer.__srcHowl;
+      var sec = Math.max(0, time / 1000);
+      var chan = this._channel;
+      if (chan && chan.__audioSource) {
+        chan.__audioSource.offset = time | 0;
+        if (chan.__audioSource.__backend && chan.__audioSource.__backend.id !== -1) {
+          var soundId = chan.__audioSource.__backend.id;
+          try {
+            h.seek(sec, soundId);
+          } catch(e) {}
+          try {
+            var s = h._soundById(soundId);
+            if (s && s._node) {
+              s._node.currentTime = sec;
+            }
+          } catch(e) {}
+          return time;
+        }
+      }
+      try {
+        h.seek(sec);
+      } catch(e) {}
+      return time;
+    }
+    return origFlxSoundSetTime.call(this, time);
+  };
+
+  var origFlxSoundStop = flixel_sound_FlxSound.prototype.stop;
+  flixel_sound_FlxSound.prototype.stop = function() {
+    this._paused = false;
+    return origFlxSoundStop.call(this);
+  };
+
   var origFlxSoundSetVolume = flixel_sound_FlxSound.prototype.set_volume;
   flixel_sound_FlxSound.prototype.set_volume = function(Volume) {
     var res = origFlxSoundSetVolume.call(this, Volume);
@@ -725,7 +963,7 @@ if (typeof flixel_sound_FlxSound !== 'undefined' && flixel_sound_FlxSound.protot
   };
 }
 `;
-  if (!js.includes('__dynamicLengthPatched') && js.includes(hookMarker)) {
+  if (!js.includes('__flxSoundSyncedPatched') && js.includes(hookMarker)) {
     js = js.replace(hookMarker, flxSoundPatch + '\n' + hookMarker);
     changed = true;
   }
